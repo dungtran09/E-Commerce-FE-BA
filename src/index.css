@@ -1,0 +1,36 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,400&display=swap");
+
+button.slick-next {
+  right: 80px;
+  height: 80px;
+  z-index: 999;
+}
+
+button.slick-prev {
+  left: 20px;
+  height: 80px;
+  z-index: 999;
+}
+
+button.slick-next::before {
+  content: "\2771";
+}
+
+button.slick-prev::before {
+  content: "\2770";
+}
+
+button.slick-next::before,
+button.slick-prev::before {
+  color: gray;
+  display: flex;
+  width: 80px;
+  height: 80px;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+}
