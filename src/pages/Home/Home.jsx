@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Sidebar,
   Banner,
   BestSellerProducts,
-  NewProducts,
   DealDaily,
+  FeaturedProducts,
+  FeaturedProductsBanner,
+  NewProducts,
+  HotCollections,
+  BlogPosts,
 } from "../../components";
 
 const Home = () => {
@@ -21,7 +25,20 @@ const Home = () => {
           <BestSellerProducts />
         </div>
       </div>
-      <div className="w-full h-[500px]"></div>
+      <div className="my-8">
+        <FeaturedProducts />
+        <FeaturedProductsBanner />
+      </div>
+
+      <div className="my-8">
+        <NewProducts />
+      </div>
+      <div className="my-8">
+        <HotCollections />
+      </div>
+      <div className="my-8">
+        <BlogPosts />
+      </div>
     </>
   );
 };

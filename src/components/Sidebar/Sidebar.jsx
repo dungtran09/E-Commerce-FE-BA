@@ -12,7 +12,6 @@ const Sidebar = () => {
   }, []);
 
   const {
-    AiOutlineMenu,
     FiHeadphones,
     PiTelevisionSimpleBold,
     GiVibratingSmartphone,
@@ -50,8 +49,12 @@ const Sidebar = () => {
         }
       >
         <div className="flex items-center">
-          <span className="pr-2 text-lg">{iconsProductCategories[index]}</span>
-          <span className="text-base">{productCategory.title}</span>
+          <span className="pr-2 text-[22px]">
+            {iconsProductCategories[index]}
+          </span>
+          <span className="text-sm">
+            {productCategory.title} ({productCategory.brand.length})
+          </span>
         </div>
       </NavLink>
     ),

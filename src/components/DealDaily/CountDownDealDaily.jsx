@@ -1,39 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useCountdown } from "../../hooks/useCountdown";
 import ExpiredNotice from "./ExpiredNotice";
 
 const CountDownDealDaily = () => {
   const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
-  const SEVEN_DAYS_IN_MS = 7 * 24 * 60 * 60 * 1000;
-
   const NOW_IN_MS = new Date().getTime();
 
   const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
-  const dateTimeAfterSevenDays = NOW_IN_MS + SEVEN_DAYS_IN_MS;
   const [days, hours, minutes, seconds] = useCountdown(dateTimeAfterThreeDays);
 
   if (days + hours + minutes + seconds <= 0) {
     return <ExpiredNotice />;
   } else {
     const styles =
-      "w-[30%] h-[60px] flex flex-col justify-center items-center bg-gray-100";
+      "w-[30%] h-[60px] flex flex-col justify-center items-center bg-gray-100 rounded-md";
     return (
       <div className="flex justify-center gap-2 items-center text-center mt-8 mb-8">
         <div className={styles}>
-          <h1 className="font-semibold text-lg">{days}</h1>
-          <span>Days</span>
+          <h1 className="font-semibold text-base">{days}</h1>
+          <span className="text-sm">Days</span>
         </div>
         <div className={styles}>
-          <h1 className="font-semibold text-lg">{hours}</h1>
-          <span>Hours</span>
+          <h1 className="font-semibold text-base">{hours}</h1>
+          <span className="text-sm">Hours</span>
         </div>
         <div className={styles}>
-          <h1 className="font-semibold text-lg">{minutes}</h1>
-          <span>Mins</span>
+          <h1 className="font-semibold text-base">{minutes}</h1>
+          <span className="text-sm">Mins</span>
         </div>
         <div className={styles}>
-          <h1 className="font-semibold text-lg">{seconds}</h1>
-          <span>Secs</span>
+          <h1 className="font-semibold text-base">{seconds}</h1>
+          <span className="text-sm">Secs</span>
         </div>
       </div>
     );

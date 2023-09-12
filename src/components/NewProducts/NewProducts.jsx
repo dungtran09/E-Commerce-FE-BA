@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import Product from "../Product/Product";
+import SliderControl from "../SliderControl/SliderControl";
+import Title from "../Title/Title";
 
 const NewProducts = () => {
-  return <div>NewProducts</div>;
+  const [activedTab, setActivedTab] = useState(2);
+  const { data: products, status } = useSelector((state) => state.products);
+
+  const productsEls = products?.map((product, index) => (
+    <Product key={index} product={product} isNew={activedTab} />
+  ));
+
+  return (
+    <>
+      <Title title="New Arrivals" />
+      <div className="mt-4 mx-[-10px]">
+        <SliderControl productsEls={productsEls} />
+      </div>
+    </>
+  );
 };
 
 export default NewProducts;

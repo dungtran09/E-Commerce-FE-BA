@@ -15,6 +15,7 @@ export const productCategoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getProductCategories.pending, (state, action) => {
+        state.data = action.payload;
         state.status = statusCode.LOADING;
       })
       .addCase(getProductCategories.fulfilled, (state, action) => {
@@ -29,11 +30,11 @@ export const productCategoriesSlice = createSlice({
 });
 
 export const getProductCategories = createAsyncThunk(
-  "app/productCategories",
+  "products/productCategories",
   async (data, { rejectWithValue }) => {
     const res = await apis.apiGetProductCategories();
     // console.log(res);
-    if (res.status !== "success") return rejectWithValue(res);
+    if (res?.status !== "success") return rejectWithValue(res);
     return res.data;
   },
 );

@@ -5,6 +5,8 @@ import newProduct from "../../assets/new.png";
 import tredingProduct from "../../assets/trending.png";
 import SelectOption from "../SelectOptions/SelectOption";
 import icons from "../../utils/icons";
+import { Link } from "react-router-dom";
+import path from "../../utils/path";
 
 const Product = ({ product, isNew }) => {
   const { AiFillEye, IoMdMenu, BsHeartFill } = icons;
@@ -12,7 +14,8 @@ const Product = ({ product, isNew }) => {
   const [isShowSelectOption, setIsShowSelectOption] = useState(false);
   return (
     <div className="w-full text-base px-[10px]">
-      <div
+      <Link
+        to={`/${path.PRODUCTS}/${product._id}`}
         className="w-full border flex flex-col items-center p-[15px]"
         onMouseEnter={(e) => {
           e.stopPropagation();
@@ -37,7 +40,7 @@ const Product = ({ product, isNew }) => {
             className="w-[274px] h-[274px] object-cover"
           />
           <img
-            src={isNew ? tredingProduct : newProduct}
+            src={isNew === 1 ? tredingProduct : newProduct}
             alt="image"
             className="absolute top-0 right-0 w-[70px] h-[25px] object-cover"
           />
@@ -49,7 +52,7 @@ const Product = ({ product, isNew }) => {
           </span>
           <span className="">{formatNumber(product?.price)} VND</span>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

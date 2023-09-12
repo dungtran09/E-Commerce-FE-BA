@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { apiGetProducts } from "../../apis/apiProducts";
-import { Product, SubBanner } from "../";
-import Slider from "react-slick";
+import { Product, SliderControl, SubBanner } from "../";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../../store/productsSlice";
+
 const tabs = [
   {
     id: 1,
@@ -13,36 +15,30 @@ const tabs = [
   },
 ];
 
-const settingsSlider = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-};
-
 const BestSellerProducts = () => {
   const [bestSellerProducts, setBestSellerProducts] = useState(null);
-  const [newProducts, setNewProducts] = useState(null);
   const [activedTab, setActivedTab] = useState(1);
   const [products, setProducts] = useState(null);
 
+  const dispatch = useDispatch();
   const fetchProducts = async () => {
-    const res = await Promise.all([
-      apiGetProducts({ sort: "-sold" }),
-      apiGetProducts({ sort: "-createAt" }),
-    ]);
+    const res = await apiGetProducts({ sort: "-sold" });
 
-    if (res[0]?.status === "success") {
-      setBestSellerProducts(res[0].data);
-      setProducts(res[0].data);
+    if (res?.status === "success") {
+      setBestSellerProducts(res.data);
+      setProducts(res.data);
     }
-    if (res[1]?.status === "success") setNewProducts(res[1].data);
   };
 
   useEffect(() => {
+    // fetch new products
+    dispatch(getProducts());
+
+    // fetch products sold in order
     fetchProducts();
   }, []);
+
+  const { data: newProducts, status } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (activedTab === 1) {
@@ -65,23 +61,19 @@ const BestSellerProducts = () => {
     </span>
   ));
 
-  const productsEl = products?.map((product) => (
-    <Product
-      key={product._id}
-      product={product}
-      isNew={activedTab == 1 ? true : false}
-    />
+  const productsEls = products?.map((product, index) => (
+    <Product key={index} product={product} isNew={activedTab === 1 ? 1 : 2} />
   ));
   return (
-    <div>
+    <>
       <div className="flex text-[25px] gap-8 pb-2 border-b-2 border-main">
         {tabsEl}
       </div>
-      <div className="mt-4 mx-[-10px]">
-        <Slider {...settingsSlider}>{productsEl}</Slider>
+      <div className="mx-[-10px]">
+        <SliderControl productsEls={productsEls} />
       </div>
       <SubBanner />
-    </div>
+    </>
   );
 };
 

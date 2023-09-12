@@ -6,6 +6,7 @@ const path = {
   PRODUCTS: "products",
   SERVICES: "services",
   FAQS: "faqs",
+  DETAILS_PRODUCT: "products/:id",
   ALL: "*",
 };
 

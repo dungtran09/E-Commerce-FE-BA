@@ -8,6 +8,16 @@ import Product from "./Product/Product";
 import SelectOption from "./SelectOptions/SelectOption";
 import SubBanner from "./Banner/SubBanner";
 import DealDaily from "./DealDaily/DealDaily";
+import FeaturedProducts from "./FeaturedProducts/FeaturedProducts";
+import Title from "./Title/Title";
+import FeaturedProductCard from "./FeaturedProducts/FeaturedProductCard";
+import FeaturedProductsBanner from "./FeaturedProducts/FeaturedProductsBanner";
+import SliderControl from "./SliderControl/SliderControl";
+import HotCollections from "./HotCollections/HotCollections";
+import BlogPosts from "./BlogPosts/BlogPosts";
+import TopHeader from "./TopHeader/TopHeader";
+import Footer from "./Footer/Footer";
+import Subscribe from "./Subscribe/Subscribe";
 
 export {
   Header,
@@ -20,4 +30,14 @@ export {
   SelectOption,
   SubBanner,
   DealDaily,
+  FeaturedProducts,
+  Title,
+  FeaturedProductCard,
+  FeaturedProductsBanner,
+  SliderControl,
+  HotCollections,
+  BlogPosts,
+  TopHeader,
+  Footer,
+  Subscribe,
 };

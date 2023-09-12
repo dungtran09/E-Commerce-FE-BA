@@ -1,6 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Public, Home, Login } from "./pages";
+import {
+  Public,
+  Home,
+  Login,
+  Products,
+  Blogs,
+  OutService,
+  FAQs,
+  ProductDetails,
+} from "./pages";
 
 import path from "./utils/path";
 
@@ -11,6 +20,11 @@ function App() {
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
           <Route path={path.LOGIN} element={<Login />} />
+          <Route path={path.PRODUCTS} element={<Products />} />
+          <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
+          <Route path={path.BLOGS} element={<Blogs />} />
+          <Route path={path.SERVICES} element={<OutService />} />
+          <Route path={path.FAQS} element={<FAQs />} />
         </Route>
       </Routes>
     </div>
