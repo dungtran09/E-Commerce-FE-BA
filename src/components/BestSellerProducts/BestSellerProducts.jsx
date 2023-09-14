@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { apiGetProducts } from "../../apis/apiProducts";
+import { apiGetProducts } from "../../apis";
 import { Product, SliderControl, SubBanner } from "../";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/productsSlice";
@@ -52,7 +52,7 @@ const BestSellerProducts = () => {
   const tabsEl = tabs.map((tab) => (
     <span
       key={tab.id}
-      className={`font-semibold capitalize border-r pr-8 text-gray-500 cursor-pointer text-lg ${
+      className={`font-semibold capitalize border-r pr-8 text-gray cursor-pointer text-lg ${
         activedTab === tab.id ? "text-main" : ""
       }`}
       onClick={() => setActivedTab(tab.id)}

@@ -10,22 +10,22 @@ const HotCollections = () => {
 
   const categoriesEls = categories?.map((category, index) => (
     <div key={index} className="flex-initial border w-[396px] flex">
-      <div className="w-[144px] h-[129px] object-cover flex-1">
-        <img src={category.image} alt="image" />
+      <div className="object-cover flex-1">
+        <img src={category.image} alt="image" className="w-[120px] h-[105px]" />
       </div>
-      <div className="p-4 flex-1 gap-4">
+      <div className="p-2 flex-1">
         <h3 className="uppercase font-medium">{category.title}</h3>
-        <ul className="text-sm ml-2">
+        <div className="flex flex-col items-start text-sm ml-2 gap-1">
           {category.brand.map((item, index) => (
-            <li
+            <span
               key={index}
               className="gap-1 cursor-pointer flex items-center font-light hover:text-main"
             >
               <IoIosArrowForward />
               {item}
-            </li>
+            </span>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   ));

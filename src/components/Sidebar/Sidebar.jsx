@@ -44,8 +44,8 @@ const Sidebar = () => {
         to={productCategory.slug}
         className={({ isActive }) =>
           isActive
-            ? "bg-main text-white px-5 pt-[15px] pb-[14px] text-base"
-            : "px-5 pt-[15px] pb-[14px] text-base hover:text-main"
+            ? "bg-main text-white px-5 pt-[15px] pb-[15px] text-base"
+            : "px-5 pt-[15px] pb-[15px] text-base hover:text-main"
         }
       >
         <div className="flex items-center">

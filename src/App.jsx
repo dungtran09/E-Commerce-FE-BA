@@ -19,13 +19,13 @@ function App() {
       <Routes>
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
-          <Route path={path.LOGIN} element={<Login />} />
           <Route path={path.PRODUCTS} element={<Products />} />
           <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
           <Route path={path.BLOGS} element={<Blogs />} />
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
         </Route>
+        <Route path={path.LOGIN} element={<Login />} />
       </Routes>
     </div>
   );

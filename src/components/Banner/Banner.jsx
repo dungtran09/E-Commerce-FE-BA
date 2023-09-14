@@ -1,5 +1,5 @@
 import React from "react";
-import sliderHome from "../../assets/slider-home.png";
+import sliderHome from "../../assets/slider-home.jpg";
 
 const Banner = () => {
   return (

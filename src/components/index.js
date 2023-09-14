@@ -18,8 +18,15 @@ import BlogPosts from "./BlogPosts/BlogPosts";
 import TopHeader from "./TopHeader/TopHeader";
 import Footer from "./Footer/Footer";
 import Subscribe from "./Subscribe/Subscribe";
-
+import InputField from "./InputField/InputField";
+import Button from "./Button/Button";
+import Portal from "./Portal/Portal";
+import Error from "./Error/Error";
+import Loader from "./Loader/Loader";
 export {
+  Error,
+  Portal,
+  Loader,
   Header,
   Navigation,
   Sidebar,
@@ -39,5 +46,7 @@ export {
   BlogPosts,
   TopHeader,
   Footer,
+  InputField,
   Subscribe,
+  Button,
 };

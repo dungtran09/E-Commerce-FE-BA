@@ -21,7 +21,7 @@ const TopHeader = () => {
     <AiFillGithub />,
   ];
 
-  const iconsElms = iconsArr.map((icon, index) => (
+  const iconsEls = iconsArr.map((icon, index) => (
     <span key={index} className="hover:text-black cursor-pointer text-sm">
       {icon}
     </span>
@@ -44,7 +44,7 @@ const TopHeader = () => {
           >
             Sign In or Create Account
           </Link>
-          {iconsElms}
+          {iconsEls}
         </div>
       </div>
     </div>

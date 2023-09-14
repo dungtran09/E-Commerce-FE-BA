@@ -7,7 +7,6 @@ const Footer = () => {
     MdEmail,
     BsTelephoneFill,
     GiPositionMarker,
-    BsCurrencyDollar,
     BiLogoFacebook,
     AiOutlineTwitter,
     AiFillInstagram,
@@ -26,12 +25,36 @@ const Footer = () => {
     <AiFillGithub />,
   ];
 
-  const iconsElms = iconsArr.map((icon, index) => (
-    <div className="px-2 py-2 bg-[#121212] rounded-lg">
-      <span key={index} className="hover:text-gray-500 cursor-pointer text-lg">
-        {icon}
-      </span>
+  const iconsEls = iconsArr.map((icon, index) => (
+    <div className="px-2 py-2 bg-[#121212] rounded-lg" key={index}>
+      <span className="hover:text-gray-500 cursor-pointer text-lg">{icon}</span>
     </div>
+  ));
+
+  const infos = [
+    "Typography",
+    "Gallery",
+    "Store Location",
+    "Today Deals",
+    "Contact",
+  ];
+  const services = [
+    "Help",
+    "Free Shipping",
+    "FAQs",
+    "Return & Exchange",
+    "Testimonials",
+  ];
+  const infoEls = infos.map((info, index) => (
+    <p className="hover:text-white cursor-pointer font-light" key={index}>
+      {info}
+    </p>
+  ));
+
+  const servicesEls = services.map((service, index) => (
+    <p className="hover:text-white cursor-pointer font-light" key={index}>
+      {service}
+    </p>
   ));
 
   return (
@@ -59,7 +82,7 @@ const Footer = () => {
                 Mail: <p className="text-xs"> E-ecommerce@support@gmail.com </p>
               </span>
               <div className="flex justify-start items-center gap-3">
-                {iconsElms}
+                {iconsEls}
               </div>
             </div>
           </div>
@@ -68,22 +91,7 @@ const Footer = () => {
               Infomation
             </h3>
             <div className="text-sm flex flex-col text-[#b7b7b7] gap-2">
-              <p className="hover:text-white cursor-pointer font-light">
-                Typography
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">
-                Gallery
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">
-                Store Location
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">
-                {" "}
-                Today Deals
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">
-                Contact
-              </p>
+              {infoEls}
             </div>
           </div>
           <div className="flex-1">
@@ -91,18 +99,7 @@ const Footer = () => {
               WHO WE ARE
             </h3>
             <div className="text-sm flex flex-col text-[#b7b7b7] gap-2">
-              <p className="hover:text-white cursor-pointer font-light">
-                {" "}
-                Help
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">
-                Free Shipping
-              </p>
-              <p className="hover:text-white cursor-pointer font-light">FAQs</p>
-              <p className="hover:text-white cursor-pointer font-light">
-                Return & Exchange
-              </p>
-              <p className="hover:text-white cursor-pointer">Testimonials</p>
+              {servicesEls}
             </div>
           </div>
           <div className="flex-1">
