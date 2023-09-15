@@ -14,7 +14,7 @@ const Public = () => {
       <TopHeader />
       <Header />
       <Navigation />
-      <div className="w-main">
+      <div className="w-full flex flex-col items-center mt-4">
         <Outlet />
       </div>
       <Subscribe />

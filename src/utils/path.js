@@ -4,9 +4,10 @@ const path = {
   LOGIN: "login",
   BLOGS: "blogs",
   PRODUCTS: "products",
+  CATEGORY: "category",
   SERVICES: "services",
   FAQS: "faqs",
-  DETAILS_PRODUCT: "products/:id",
+  DETAILS_PRODUCT: ":products/:category/:title/:id",
   ALL: "*",
 };
 

@@ -23,7 +23,10 @@ import Button from "./Button/Button";
 import Portal from "./Portal/Portal";
 import Error from "./Error/Error";
 import Loader from "./Loader/Loader";
+import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
+
 export {
+  Breadcrumbs,
   Error,
   Portal,
   Loader,

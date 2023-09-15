@@ -6,8 +6,10 @@ import ProductDetails from "./Products/ProductDetails";
 import FAQs from "./FAQs/FAQs";
 import OutService from "./OutService/OutService";
 import Blogs from "./Blogs/Blogs";
+import Category from "./Category/Category";
 
 export {
+  Category,
   Public,
   Home,
   Login,

@@ -9,6 +9,7 @@ import {
   OutService,
   FAQs,
   ProductDetails,
+  Category,
 } from "./pages";
 
 import path from "./utils/path";
@@ -20,6 +21,7 @@ function App() {
         <Route path={path.PUBLIC} element={<Public />}>
           <Route path={path.HOME} element={<Home />} />
           <Route path={path.PRODUCTS} element={<Products />} />
+          <Route path={path.CATEGORY} element={<Category />} />
           <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
           <Route path={path.BLOGS} element={<Blogs />} />
           <Route path={path.SERVICES} element={<OutService />} />
