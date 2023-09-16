@@ -28,7 +28,7 @@ const TopHeader = () => {
   ));
 
   return (
-    <div className="h-[38px] w-full bg-main text-white flex justify-center items-center ">
+    <header className="h-[38px] w-full bg-main text-white flex justify-center items-center ">
       <div className="w-main flex justify-between text-xs">
         <div className="flex justify-center items-center gap-1">
           <span className="border-r border-b-gray-300 pr-2">
@@ -47,7 +47,7 @@ const TopHeader = () => {
           {iconsEls}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

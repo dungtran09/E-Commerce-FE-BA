@@ -7,7 +7,7 @@ import { ImMenu } from "react-icons/im";
 import CountDownDealDaily from "./CountDownDealDaily";
 
 const DealDaily = () => {
-  const { AiFillStar, AiOutlineMenu } = icons;
+  const { AiFillStar } = icons;
   const [dealDailyProduct, setDealDailyProduct] = useState(null);
 
   const fetchProductForDealDaily = async () => {

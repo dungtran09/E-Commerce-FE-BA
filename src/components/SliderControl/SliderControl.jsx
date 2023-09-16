@@ -1,12 +1,12 @@
 import React, { memo } from "react";
 import Slider from "react-slick";
 
-const SliderControl = ({ productsEls }) => {
+const SliderControl = ({ productsEls, slidesToShow }) => {
   const settingsSlider = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: slidesToShow,
     slidesToScroll: 1,
   };
   return (

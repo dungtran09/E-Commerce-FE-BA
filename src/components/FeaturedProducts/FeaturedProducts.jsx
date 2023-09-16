@@ -7,9 +7,8 @@ const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState(null);
   const fetchProducts = async () => {
     const response = await apiGetProducts({
-      limit: 9,
-      totalRatings: { $gt: 4 },
-      price: "-price",
+      totalRatings: { gt: 4 },
+      sort: "-price",
     });
 
     if (response?.status === "success") {

@@ -7,7 +7,7 @@ import path from "../../utils/path";
 const Header = () => {
   const { BsTelephoneFill, BsBagPlusFill, MdEmail, FaUser } = icons;
   return (
-    <div className="w-main flex justify-between h-[110px] py-[35px]">
+    <header className="w-main flex justify-between h-[110px] py-[35px]">
       <div className="w-[234px]">
         <Link to={`/${path.HOME}`}>
           <img src={logo} alt="logo" className="object-contain" />
@@ -36,7 +36,7 @@ const Header = () => {
           <FaUser color="red" size={22} />
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

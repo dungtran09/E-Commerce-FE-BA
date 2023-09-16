@@ -5,16 +5,18 @@ import {
   BsHeartFill,
   BsCurrencyDollar,
   BsPaypal,
+  BsFillCartCheckFill,
 } from "react-icons/bs";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdLocalShipping } from "react-icons/md";
 import {
   FaUser,
   FaTabletAlt,
   FaLaptop,
   FaHome,
   FaCcMastercard,
+  FaPhoneSquareAlt,
 } from "react-icons/fa";
-import { AiFillEye, AiOutlineMenu } from "react-icons/ai";
+import { AiFillEye, AiOutlineMenu, AiFillGift } from "react-icons/ai";
 import { GiVibratingSmartphone } from "react-icons/gi";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { FiCamera, FiPrinter, FiHeadphones } from "react-icons/fi";
@@ -31,8 +33,17 @@ import { ImMenu } from "react-icons/im";
 import { IoIosArrowForward } from "react-icons/io";
 import { BiLogoFacebook, BiLogoVisa } from "react-icons/bi";
 import { GiPositionMarker } from "react-icons/gi";
-
+import { GoDotFill } from "react-icons/go";
+import { SiSpringsecurity } from "react-icons/si";
+import { SiConvertio } from "react-icons/si";
 const icons = {
+  FaPhoneSquareAlt,
+  SiConvertio,
+  SiSpringsecurity,
+  MdLocalShipping,
+  AiFillGift,
+  BsFillCartCheckFill,
+  GoDotFill,
   BsTelephoneFill,
   MdEmail,
   BsBagPlusFill,

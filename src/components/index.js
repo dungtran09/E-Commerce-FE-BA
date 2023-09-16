@@ -24,8 +24,24 @@ import Portal from "./Portal/Portal";
 import Error from "./Error/Error";
 import Loader from "./Loader/Loader";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
+import Details from "./InfosProduct/Details";
+import Policy from "./Policy/Policy";
+import ImagesDetails from "./InfosProduct/ImagesDetails";
+import CounterQuanrity from "./InfosProduct/CounterQuanrity";
+import ProductInfomation from "./InfosProduct/ProductInfomation";
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
+import Filter from "./Filter/Filter";
+import ListProducts from "./ListProducts/ListProducts";
 
 export {
+  ListProducts,
+  Filter,
+  RelatedProducts,
+  ProductInfomation,
+  CounterQuanrity,
+  ImagesDetails,
+  Policy,
+  Details,
   Breadcrumbs,
   Error,
   Portal,

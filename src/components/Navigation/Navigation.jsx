@@ -16,9 +16,9 @@ const Navigation = () => {
   ));
 
   return (
-    <div className="border-y w-main h-[48px] py-2 text-sm flex items-center">
+    <nav className="border-y w-main h-[48px] py-2 text-sm flex items-center">
       {navBarEl}
-    </div>
+    </nav>
   );
 };
 

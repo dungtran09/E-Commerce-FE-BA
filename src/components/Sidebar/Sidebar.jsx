@@ -41,7 +41,7 @@ const Sidebar = () => {
     (productCategory, index) => (
       <NavLink
         key={index}
-        to={productCategory.slug}
+        to={productCategory.title}
         className={({ isActive }) =>
           isActive
             ? "bg-main text-white px-5 pt-[15px] pb-[15px] text-base"

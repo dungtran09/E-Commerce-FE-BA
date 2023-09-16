@@ -69,8 +69,8 @@ const BestSellerProducts = () => {
       <div className="flex text-[25px] gap-8 pb-2 border-b-2 border-main">
         {tabsEl}
       </div>
-      <div className="mx-[-10px]">
-        <SliderControl productsEls={productsEls} />
+      <div className="border">
+        <SliderControl productsEls={productsEls} slidesToShow={3} />
       </div>
       <SubBanner />
     </>

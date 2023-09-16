@@ -15,8 +15,8 @@ const NewProducts = () => {
   return (
     <>
       <Title title="New Arrivals" />
-      <div className="mt-4 mx-[-10px]">
-        <SliderControl productsEls={productsEls} />
+      <div className="border">
+        <SliderControl productsEls={productsEls} slidesToShow={4} />
       </div>
     </>
   );

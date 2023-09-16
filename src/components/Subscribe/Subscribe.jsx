@@ -5,11 +5,11 @@ const Subscribe = () => {
   const { MdEmail } = icons;
 
   return (
-    <div className="h-[103px] bg-main w-full flex justify-between items-center">
+    <div className="h-[103px] bg-main w-full flex justify-between items-center mt-4">
       <div className="w-main flex justify-between items-center m-auto">
         <div className="flex flex-col flex-1 text-white">
           <h3 className="text-lg font-medium">SIGN UP TO NEWSLETTER</h3>
-          <p className="text-sm text-zinc-300">
+          <p className="text-sm text-white">
             Subscribe now and receive weekly newsletter
           </p>
         </div>
