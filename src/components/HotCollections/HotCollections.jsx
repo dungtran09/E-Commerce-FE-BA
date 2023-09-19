@@ -10,7 +10,7 @@ const HotCollections = () => {
 
   const categoriesEls = categories?.map((category, index) => (
     <div key={index} className="flex-initial border w-[396px] flex">
-      <div className="object-cover flex-1">
+      <div className="flex-1">
         <img src={category.image} alt="image" className="w-[120px] h-[105px]" />
       </div>
       <div className="p-2 flex-1">

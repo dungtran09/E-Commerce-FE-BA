@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { formatNumber, calcRating } from "../../utils/helper";
 import icons from "../../utils/icons";
 import Button from "../Button/Button";
@@ -8,22 +8,6 @@ import ImagesDetails from "./ImagesDetails";
 
 const Details = ({ product }) => {
   const { GoDotFill, BsFillCartCheckFill } = icons;
-
-  const onHandlerImg = (image) => {
-    setImgThumb(image);
-  };
-  const [imgThumb, setImgThumb] = useState(product?.thumb);
-
-  const imgEls = product?.images?.map((image, index) => (
-    <div key={index} className="flex w-full">
-      <img
-        src={image}
-        alt="image"
-        className="w-[143px] h-[143px] border object-cover cursor-pointer hover:border-main"
-        onClick={() => onHandlerImg(image)}
-      />
-    </div>
-  ));
 
   const descriptionEls = product?.description?.map((des, index) => (
     <span key={index} className="flex justify-start items-center gap-2">
@@ -43,7 +27,7 @@ const Details = ({ product }) => {
   return (
     <div className="flex m-auto w-main">
       <div className="w-2/5 flex flex-col gap-5">
-        <ImagesDetails imgEls={imgEls} imgThumb={imgThumb} product={product} />
+        <ImagesDetails images={product?.images} thumb={product?.thumb} />
       </div>
       <div className="w-2/5">
         <div className="flex flex-col justify-center items-start gap-3">

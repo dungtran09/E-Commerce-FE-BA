@@ -1,13 +1,13 @@
 const path = {
   PUBLIC: "/",
   HOME: "",
-  LOGIN: "login",
-  BLOGS: "blogs",
-  PRODUCTS: ":products",
-  CATEGORY: "category",
-  SERVICES: "services",
-  FAQS: "faqs",
-  DETAILS_PRODUCT: ":products/:category/:title/:id",
+  LOGIN: "Login",
+  BLOGS: "Blogs",
+  PRODUCTS: "Products",
+  CATEGORY: "Products/:category",
+  SERVICES: "Services",
+  FAQS: "Faqs",
+  DETAILS_PRODUCT: "Products/:category/:title/:id",
   ALL: "*",
 };
 

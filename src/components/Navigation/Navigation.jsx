@@ -1,17 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import navigation from "../../utils/constants";
+import { navigation } from "../../utils/constants";
 
 const Navigation = () => {
-  const navBarEl = navigation.map((el) => (
+  const navBarEl = navigation.map((navi) => (
     <NavLink
-      to={el.path}
-      key={el.id}
+      to={navi.path}
+      key={navi.id}
       className={({ isActive }) =>
         isActive ? "pr-12 hover:text-main text-main" : "pr-12 hover:text-main"
       }
     >
-      {el.value}
+      {navi.value}
     </NavLink>
   ));
 

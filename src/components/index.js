@@ -32,8 +32,17 @@ import ProductInfomation from "./InfosProduct/ProductInfomation";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import Filter from "./Filter/Filter";
 import ListProducts from "./ListProducts/ListProducts";
-
+import VoteBar from "./CustomerReview/VoteBar";
+import UserRatings from "./CustomerReview/UserRatings";
+import CustomerReview from "./CustomerReview/CustomerReview";
+import Brands from "./Brands/Brands";
+import Pagination from "./Pagination/Pagination";
 export {
+  Pagination,
+  Brands,
+  CustomerReview,
+  VoteBar,
+  UserRatings,
   ListProducts,
   Filter,
   RelatedProducts,

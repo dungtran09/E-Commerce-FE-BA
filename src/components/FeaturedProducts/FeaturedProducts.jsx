@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { apiGetProducts } from "../../apis/apiProducts";
+import path from "../../utils/path";
 import Title from "../Title/Title";
 import FeaturedProductCard from "./FeaturedProductCard";
 
@@ -23,10 +25,13 @@ const FeaturedProducts = () => {
   const featuredProductsEls = featuredProducts?.map((product, index) => (
     <FeaturedProductCard
       key={index}
-      thumb={product.thumb}
-      title={product.title}
-      price={product.price}
-      totalRatings={product.totalRatings}
+      thumb={product?.thumb}
+      title={product?.title}
+      price={product?.price}
+      totalRatings={product?.totalRatings}
+      _id={product?._id}
+      category={product?.category}
+      slug={product?.slug}
     />
   ));
 

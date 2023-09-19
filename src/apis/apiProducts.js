@@ -7,3 +7,19 @@ export const apiGetProducts = (params) => {
     params,
   });
 };
+
+export const apiGetColors = (params) => {
+  return axios({
+    url: "/products/colors",
+    method: "get",
+    params,
+  });
+};
+
+export const apiCountCategory = (params) => {
+  return axios({
+    url: "/products/count",
+    method: "get",
+    params,
+  });
+};

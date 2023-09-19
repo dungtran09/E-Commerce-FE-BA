@@ -5,6 +5,8 @@ import storage from "redux-persist/lib/storage";
 import productCategoriesSlice from "./productCategoriesSlice";
 import productsSlice from "./productsSlice";
 import userSlice from "./userSlice";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 const commonConfig = {
   key: "jwt/user",
@@ -22,6 +24,7 @@ export const store = configureStore({
     products: productsSlice,
     user: persistReducer(userConfig, userSlice),
   },
+  middleware: [thunk, logger],
 });
 
 export const persistor = persistStore(store);

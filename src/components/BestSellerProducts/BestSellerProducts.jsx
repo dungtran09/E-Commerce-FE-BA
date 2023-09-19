@@ -25,8 +25,8 @@ const BestSellerProducts = () => {
     const res = await apiGetProducts({ sort: "-sold" });
 
     if (res?.status === "success") {
-      setBestSellerProducts(res.data);
-      setProducts(res.data);
+      setBestSellerProducts(res?.data);
+      setProducts(res?.data);
     }
   };
 

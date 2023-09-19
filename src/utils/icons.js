@@ -6,6 +6,8 @@ import {
   BsCurrencyDollar,
   BsPaypal,
   BsFillCartCheckFill,
+  BsChevronLeft,
+  BsChevronRight,
 } from "react-icons/bs";
 import { MdEmail, MdLocalShipping } from "react-icons/md";
 import {
@@ -36,7 +38,14 @@ import { GiPositionMarker } from "react-icons/gi";
 import { GoDotFill } from "react-icons/go";
 import { SiSpringsecurity } from "react-icons/si";
 import { SiConvertio } from "react-icons/si";
+import { GrAttachment } from "react-icons/gr";
+import { BiSolidImageAdd } from "react-icons/bi";
+
 const icons = {
+  BsChevronLeft,
+  BsChevronRight,
+  BiSolidImageAdd,
+  GrAttachment,
   FaPhoneSquareAlt,
   SiConvertio,
   SiSpringsecurity,

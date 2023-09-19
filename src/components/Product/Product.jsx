@@ -14,11 +14,9 @@ const Product = ({ product, isNew }) => {
   const [isShowSelectOption, setIsShowSelectOption] = useState(false);
   return (
     <div className="w-full text-base">
-      <div className="flex flex-col items-center p-2 bg-white border border-gray-200 shadow">
+      <div className="flex flex-col items-center p-4 bg-white border border-gray-200 shadow">
         <Link
-          to={`/${path.PRODUCTS}/${product.category.toLowerCase()}/${
-            product.slug
-          }/${product._id}`}
+          to={`/${path.PRODUCTS}/${product.category}/${product.slug}/${product._id}`}
           onMouseEnter={(e) => {
             e.stopPropagation();
             setIsShowSelectOption(true);
@@ -45,11 +43,11 @@ const Product = ({ product, isNew }) => {
               <img
                 src={isNew === 1 ? tredingProduct : newProduct}
                 alt="image"
-                className="absolute top-0 right-0 w-[70px] h-[25px] object-cover"
+                className="absolute top-0 right-0 w-[70px] h-[25px]"
               />
             )}
           </div>
-          <div className="flex flex-col gap-1 w-full mt-[15px] items-start">
+          <div className="flex flex-col gap-2 w-full mt-[15px] items-start">
             <span className="line-clamp-1">{product?.title}</span>
             <span className="flex flex-row h-4">
               {calcRating(product.totalRatings)}

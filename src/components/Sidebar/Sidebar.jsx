@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getProductCategories } from "../../store/productCategoriesSlice";
 import icons from "../../utils/icons";
+import path from "../../utils/path";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Sidebar = () => {
     (productCategory, index) => (
       <NavLink
         key={index}
-        to={productCategory.title}
+        to={`/${path.PRODUCTS}/${productCategory.title}`}
         className={({ isActive }) =>
           isActive
             ? "bg-main text-white px-5 pt-[15px] pb-[15px] text-base"

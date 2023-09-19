@@ -7,7 +7,7 @@ const CountDownDealDaily = () => {
   const NOW_IN_MS = new Date().getTime();
 
   const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
-  const [days, hours, minutes, seconds] = useCountdown(NOW_IN_MS);
+  const [days, hours, minutes, seconds] = useCountdown(dateTimeAfterThreeDays);
 
   if (days + hours + minutes + seconds <= 0) {
     return <ExpiredNotice />;

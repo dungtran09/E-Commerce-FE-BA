@@ -11,17 +11,18 @@ const Breadcrumbs = ({ category, slug }) => {
 
   const routers = [
     { path: paths[0], breadcrumb: "Home" },
-    { path: paths[1], breadcrumb: category },
+    { path: paths[1], breadcrumb: "Products" },
+    { path: paths[2], breadcrumb: category },
     { path: paths[paths.length - 1], breadcrumb: slug },
   ];
 
-  const breadcrumbsEls = routers.map((router, index) => (
+  const breadcrumbsEls = breadcrumbs.map((breadcrumb, index) => (
     <Link
       key={index}
-      to={router.path}
+      to={routers[index]?.path}
       className="flex justify-start items-center"
     >
-      <span className="hover:text-main">{router.breadcrumb}</span>
+      <span className="hover:text-main">{routers[index]?.breadcrumb}</span>
       {++index < routers.length ? (
         <IoIosArrowForward className="text-[14px] text-black pl-1" />
       ) : (

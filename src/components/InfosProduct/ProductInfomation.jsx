@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useState } from "react";
+import CustomerReview from "../CustomerReview/CustomerReview";
 const ProductInfomation = () => {
   const [actived, setActived] = useState(0);
   const infos = [
@@ -89,7 +89,7 @@ const ProductInfomation = () => {
     {
       id: 4,
       title: "CUSTOMER REVIEWS",
-      desc: "",
+      desc: <CustomerReview />,
     },
   ];
 
@@ -105,7 +105,7 @@ const ProductInfomation = () => {
         }`}
         onClick={() => handlerActived(info.id)}
       >
-        {info.title}
+        <h3 className="text-sm">{info.title}</h3>
       </span>
     </div>
   ));
@@ -115,7 +115,9 @@ const ProductInfomation = () => {
       <div className="flex items-center gap-1 relative bottom-[-1px]">
         {infosEls}
       </div>
-      <div className="border w-full p-4">{infos[actived].desc}</div>
+      <div className="border w-full p-4 text-sm text-gray-700">
+        {infos[actived].desc}
+      </div>
     </>
   );
 };
