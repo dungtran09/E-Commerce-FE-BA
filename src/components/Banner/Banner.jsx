@@ -8,17 +8,9 @@ import { Carousel } from "react-responsive-carousel";
 const Banner = () => {
   return (
     <div className="w-full border">
-      <Carousel>
-        <div>
-          <img src={banner1} />
-        </div>
-        <div>
-          <img src={banner2} />
-        </div>
-        <div>
-          <img src={banner3} />
-        </div>
-      </Carousel>
+      <div>
+        <img src={banner2} />
+      </div>
     </div>
   );
 };

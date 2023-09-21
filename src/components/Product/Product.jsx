@@ -8,15 +8,15 @@ import icons from "../../utils/icons";
 import { Link } from "react-router-dom";
 import path from "../../utils/path";
 
-const Product = ({ product, isNew }) => {
+const Product = ({ product, isNew, category }) => {
   const { AiFillEye, IoMdMenu, BsHeartFill } = icons;
 
   const [isShowSelectOption, setIsShowSelectOption] = useState(false);
   return (
     <div className="w-full text-base">
-      <div className="flex flex-col items-center p-4 bg-white border border-gray-200 shadow">
+      <div className="flex flex-col items-center p-2 bg-white border border-gray-200 shadow">
         <Link
-          to={`/${path.PRODUCTS}/${product.category}/${product.slug}/${product._id}`}
+          to={`/${path.PRODUCTS}/${category}/${product.slug}/${product?._id}`}
           onMouseEnter={(e) => {
             e.stopPropagation();
             setIsShowSelectOption(true);
@@ -37,7 +37,7 @@ const Product = ({ product, isNew }) => {
             <img
               src={product?.thumb || productImgPlaceHolder}
               alt={product.name}
-              className="w-[274px] h-[274px] object-cover"
+              className="w-[200px] h-[170px] object-fill"
             />
             {isNew && (
               <img

@@ -8,6 +8,14 @@ export const apiGetProducts = (params) => {
   });
 };
 
+export const apiGetProductsByCategoryId = (_id, params) => {
+  return axios({
+    url: "/products?category=" + _id,
+    method: "get",
+    params,
+  });
+};
+
 export const apiGetColors = (params) => {
   return axios({
     url: "/products/colors",

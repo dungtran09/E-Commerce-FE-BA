@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import { getProductCategories } from "./store/productCategoriesSlice";
+import { useDispatch } from "react-redux";
+
 import {
   Public,
   Home,
@@ -15,6 +18,12 @@ import {
 import path from "./utils/path";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProductCategories());
+  }, []);
+
   return (
     <div className="min-h-screen font-main">
       <Routes>

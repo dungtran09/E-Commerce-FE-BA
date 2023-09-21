@@ -15,8 +15,8 @@ export const productCategoriesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getProductCategories.pending, (state, action) => {
-        state.data = action.payload;
         state.status = statusCode.LOADING;
+        state.data = action.payload;
       })
       .addCase(getProductCategories.fulfilled, (state, action) => {
         state.data = action.payload;

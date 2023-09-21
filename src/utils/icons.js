@@ -29,6 +29,7 @@ import {
   AiFillInstagram,
   AiOutlineGoogle,
   AiFillGithub,
+  AiOutlineSearch,
 } from "react-icons/ai";
 import { IoMdMenu } from "react-icons/io";
 import { ImMenu } from "react-icons/im";
@@ -42,6 +43,7 @@ import { GrAttachment } from "react-icons/gr";
 import { BiSolidImageAdd } from "react-icons/bi";
 
 const icons = {
+  AiOutlineSearch,
   BsChevronLeft,
   BsChevronRight,
   BiSolidImageAdd,

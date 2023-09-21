@@ -6,7 +6,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
   const { BsChevronLeft, BsChevronRight } = icons;
 
   const handlerPageClick = ({ selected }) => {
-    setCurrentPage(selected);
+    setCurrentPage(selected + 1);
   };
   const [showNextButton, setShowNextButton] = useState(false);
   const [showPrevButton, setShowPrevButton] = useState(false);

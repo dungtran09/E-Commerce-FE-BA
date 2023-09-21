@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { apiGetColors, apiGetProductCategories } from "../../apis";
 
 import { prices } from "../../utils/constants";
+import icons from "../../utils/icons";
 
-const Filter = () => {
+const Filter = ({ brands }) => {
+  const { AiOutlineSearch } = icons;
   const [isToggle, setIsToggle] = useState(false);
   const [selected, setSelected] = useState([]);
-  const [brands, setBrands] = useState(null);
   const [colors, setColors] = useState(null);
 
   const { category } = useParams();
-
-  const fetchBrands = async (category) => {
-    const res = await apiGetProductCategories({ title: category });
-    if (res?.status === "success") {
-      setBrands(res?.data);
-    }
-  };
 
   const fetchColors = async () => {
     const res = await apiGetColors();
@@ -28,7 +22,6 @@ const Filter = () => {
   };
 
   useEffect(() => {
-    fetchBrands(category);
     fetchColors();
   }, [category]);
 
@@ -88,100 +81,119 @@ const Filter = () => {
     setCheckedStateBrands(updatedCheckedStateBands);
   };
 
-  const styleBtn =
-    "bg-gray-100 hover:bg-gray-150 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center cursor-pointer";
+  // const pricesEls = prices?.map((price) => (
+  //   <div className="max-w-sm flex justify-center items-center" key={price.id}>
+  //     <div className="flex items-start space-x-3 py-2">
+  //       <input
+  //         type="checkbox"
+  //         id={`hs-list-group-item-checkbox-price-${price.id}`}
+  //         name={price.value}
+  //         value={price.value}
+  //         className="border-gray-200 h-5 w-5 cursor-pointer"
+  //         checked={checkedStatePrices[price.id]}
+  //         onChange={() => handlerOnChangePrices(price.id, price.value)}
+  //       />
+  //     </div>
+  //     <label
+  //       htmlFor={`hs-list-group-item-checkbox-price-${price.id}`}
+  //       className="ml-3.5 block w-full text-sm text-gray-600 cursor-pointer hover:text-main"
+  //     >
+  //       {price.value}
+  //     </label>
+  //   </div>
+  // ));
+  // const colorEls = colors?.map((cl, index) => (
+  //   <div className="max-w-sm flex justify-center items-center" key={index}>
+  //     <div className="flex items-start space-x-3 py-2">
+  //       <input
+  //         id={`hs-list-group-item-checkbox-color-${index}`}
+  //         type="checkbox"
+  //         name={cl.color}
+  //         value={cl.color}
+  //         className="border-gray-200 h-5 w-5 cursor-pointer"
+  //         checked={checkedStateColors[index]}
+  //         onChange={() => handlerOnChangeColors(index, cl.color)}
+  //       />
+  //     </div>
+  //     <label
+  //       htmlFor={`hs-list-group-item-checkbox-color-${index}`}
+  //       className="ml-3.5 block w-full text-sm text-gray-600 cursor-pointer hover:text-main"
+  //     >
+  //       {cl.color}
+  //     </label>
+  //   </div>
+  // ));
 
-  const pricesEls = prices?.map((price) => (
-    <div className="max-w-sm flex justify-center items-center" key={price.id}>
+  const brandEls = brands?.map((brand) => (
+    <div className="max-w-sm flex justify-center items-center" key={brand?._id}>
       <div className="flex items-start space-x-3 py-2">
         <input
           type="checkbox"
-          id={`hs-list-group-item-checkbox-price-${price.id}`}
-          name={price.value}
-          value={price.value}
+          id={`hs-list-group-item-checkbox-cate-${brand?._id}`}
           className="border-gray-200 h-5 w-5 cursor-pointer"
-          checked={checkedStatePrices[price.id]}
-          onChange={() => handlerOnChangePrices(price.id, price.value)}
+          name={brand?.title}
+          value={brand?.title}
+          checked={checkedStateBrands[brand?._id]}
+          onChange={() => handlerOnChangeBrands(brand?._id, brand?.title)}
         />
       </div>
       <label
-        htmlFor={`hs-list-group-item-checkbox-price-${price.id}`}
+        htmlFor={`hs-list-group-item-checkbox-cate-${brand?._id}`}
         className="ml-3.5 block w-full text-sm text-gray-600 cursor-pointer hover:text-main"
       >
-        {price.value}
-      </label>
-    </div>
-  ));
-  const colorEls = colors?.map((cl, index) => (
-    <div className="max-w-sm flex justify-center items-center" key={index}>
-      <div className="flex items-start space-x-3 py-2">
-        <input
-          id={`hs-list-group-item-checkbox-color-${index}`}
-          type="checkbox"
-          name={cl.color}
-          value={cl.color}
-          className="border-gray-200 h-5 w-5 cursor-pointer"
-          checked={checkedStateColors[index]}
-          onChange={() => handlerOnChangeColors(index, cl.color)}
-        />
-      </div>
-      <label
-        htmlFor={`hs-list-group-item-checkbox-color-${index}`}
-        className="ml-3.5 block w-full text-sm text-gray-600 cursor-pointer hover:text-main"
-      >
-        {cl.color}
-      </label>
-    </div>
-  ));
-
-  const brandEls = brands?.["0"]?.brand?.map((brand, index) => (
-    <div className="max-w-sm flex justify-center items-center" key={index}>
-      <div className="flex items-start space-x-3 py-2">
-        <input
-          type="checkbox"
-          id={`hs-list-group-item-checkbox-cate-${index}`}
-          className="border-gray-200 h-5 w-5 cursor-pointer"
-          name={brand}
-          value={brand}
-          checked={checkedStateBrands[index]}
-          onChange={() => handlerOnChangeBrands(index, brand)}
-        />
-      </div>
-      <label
-        htmlFor={`hs-list-group-item-checkbox-cate-${index}`}
-        className="ml-3.5 block w-full text-sm text-gray-600 cursor-pointer hover:text-main"
-      >
-        {brand}
+        {brand?.title}
       </label>
     </div>
   ));
   return (
     <>
-      <div className="flex w-main justify-between items-center border p-2 shadow-lg">
-        <div className="flex gap-4 text-sm">
-          <span className={styleBtn} onClick={() => setIsToggle(!isToggle)}>
-            ({selected.length}) Filters
-          </span>
-          <span className={styleBtn}>Clear All</span>
+      <div className="w-full shadow p-5 bg-white">
+        <div className="relative">
+          <div className="absolute flex items-center ml-2 h-full">
+            <AiOutlineSearch />
+          </div>
+
+          <input
+            type="text"
+            placeholder="Search by listing, location, bedroom number..."
+            className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          />
         </div>
-        <div className={styleBtn}>Sort by</div>
+
+        <div className="flex items-center justify-between mt-4">
+          <button
+            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
+            onClick={() => setIsToggle(!isToggle)}
+          >
+            Filters ({selected.length || 0})
+          </button>
+
+          <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
+            Reset Filter
+          </button>
+        </div>
+
+        {isToggle && (
+          <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
+              <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                <span className="text-lg font-semibold">Brands</span>
+                {brandEls}
+              </div>
+
+              <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                <span className="text-lg font-semibold">Prices</span>
+                {}
+              </div>
+
+              <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+                <span className="text-lg font-semibold">Colors</span>
+                {}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      {isToggle && (
-        <div className="w-main flex flex-wrap gap-5 border-x border-b p-4 shadow-md">
-          <div className="flex-1 flex flex-col p-4 gap-3 border">
-            <div className="text-gray-700 font-semibold">Price</div>
-            <div className="flex flex-col">{pricesEls}</div>
-          </div>
-          <div className="flex-1 flex flex-col gap-3 p-4 border">
-            <div className="text-gray-700 font-semibold">Colors</div>
-            <div className="flex flex-col">{colorEls}</div>
-          </div>
-          <div className="flex-1 flex flex-col gap-3 p-4 border">
-            <div className="text-gray-700 font-semibold">Brands</div>
-            <div className="flex flex-col">{brandEls}</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

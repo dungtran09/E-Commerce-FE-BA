@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import InnerImageZoom from "react-inner-image-zoom";
 import PropTypes from "prop-types";
 
-const ImagesDetails = ({ images, thumb }) => {
+const ImagesDetails = ({ variants, thumb }) => {
   const [imgThumb, setImgThumb] = useState(thumb);
+
+  console.log(variants);
 
   const onHandlerImg = (image) => {
     setImgThumb(image);
@@ -13,13 +15,13 @@ const ImagesDetails = ({ images, thumb }) => {
     setImgThumb(thumb);
   }, [thumb]);
 
-  const imgEls = images?.map((image, index) => (
+  const imgEls = variants?.colors?.map((color, index) => (
     <div key={index} className="flex-1 flex-wrap w-full ">
       <img
-        src={image}
+        src={color?.image}
         alt="image"
-        className="w-[100%] h-[100%] border object-cover hover:border-main overflow-hidden cursor-pointer"
-        onClick={() => onHandlerImg(image)}
+        className="w-[100%]border object-cover hover:border-main overflow-hidden cursor-pointer"
+        onClick={() => onHandlerImg(color?.image)}
       />
     </div>
   ));
@@ -27,11 +29,11 @@ const ImagesDetails = ({ images, thumb }) => {
   return (
     <>
       <div className="w-full">
-        <div className="w-[458px] h-[460px] flex justify-center items-center border hover:border-main">
+        <div className="w-[458px] h-[550px] flex justify-center items-center border hover:border-main">
           <InnerImageZoom
             src={imgThumb}
             zoomSrc={imgThumb}
-            className="w-[100%] h-[100%] object-contain cursor-pointer"
+            className="object-contain cursor-pointer"
           />
         </div>
       </div>

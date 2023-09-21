@@ -5,7 +5,7 @@ import { Details, ProductInfomation, RelatedProducts } from "../../components";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
 
 const ProductDetails = () => {
-  const { id } = useParams();
+  const { category, title, id } = useParams();
   const [product, setProduct] = useState(null);
 
   const fetchProduct = async () => {
@@ -15,6 +15,8 @@ const ProductDetails = () => {
     }
   };
 
+  console.log(product);
+
   useEffect(() => {
     fetchProduct();
   }, [id]);
@@ -22,7 +24,7 @@ const ProductDetails = () => {
   return (
     <div className="w-full">
       <section className="flex flex-col justify-center items-center h-[81px] bg-gray-100">
-        <Breadcrumbs category={product?.category} slug={product?.slug} />
+        <Breadcrumbs category={category} title={title} />
       </section>
       <section className="w-main m-auto flex flex-col mt-4">
         <Details product={product} />

@@ -7,6 +7,7 @@ import productsSlice from "./productsSlice";
 import userSlice from "./userSlice";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import brands from "./brandsSlice";
 
 const commonConfig = {
   key: "jwt/user",
@@ -22,6 +23,7 @@ export const store = configureStore({
   reducer: {
     categories: productCategoriesSlice,
     products: productsSlice,
+    brands: brands,
     user: persistReducer(userConfig, userSlice),
   },
   middleware: [thunk, logger],

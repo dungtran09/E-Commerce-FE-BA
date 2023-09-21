@@ -9,25 +9,32 @@ import ImagesDetails from "./ImagesDetails";
 const Details = ({ product }) => {
   const { GoDotFill, BsFillCartCheckFill } = icons;
 
-  const descriptionEls = product?.description?.map((des, index) => (
+  const configurationEls = product?.configuration?.map((config, index) => (
     <span key={index} className="flex justify-start items-center gap-2">
-      <GoDotFill /> <p>{des}</p>
+      <GoDotFill />{" "}
+      <p>
+        {JSON.stringify(config)
+          .split(/["{}_]/)
+          .join(" ")
+          .toString()
+          .toUpperCase()}
+      </p>
     </span>
   ));
 
-  const colorEls = product?.colors?.map((color, index) => (
-    <span
-      key={index}
-      className="flext justify-start items-center text-[13px] uppercase border p-2 cursor-pointer hover:text-main hover:border-main"
-    >
-      {color}
-    </span>
-  ));
+  // const colorEls = product?.colors?.map((color, index) => (
+  //   <span
+  //     key={index}
+  //     className="flext justify-start items-center text-[13px] uppercase border p-2 cursor-pointer hover:text-main hover:border-main"
+  //   >
+  //     {color}
+  //   </span>
+  // ));
 
   return (
     <div className="flex m-auto w-main">
       <div className="w-2/5 flex flex-col gap-5">
-        <ImagesDetails images={product?.images} thumb={product?.thumb} />
+        <ImagesDetails variants={product?.variants} thumb={product?.thumb} />
       </div>
       <div className="w-2/5">
         <div className="flex flex-col justify-center items-start gap-3">
@@ -36,12 +43,12 @@ const Details = ({ product }) => {
           </h3>
           <div className="flex">{calcRating(product?.totalRatings)}</div>
           <div className="text-sm text-gray-800 flex flex-col gap-1">
-            {descriptionEls}
+            {configurationEls}
           </div>
           <div className="flex gap-2">
             <label className="font-semibold text-sm mt-2">Color: </label>
             <div className="flex gap-2 justify-start items-center pl-12">
-              {colorEls}
+              {}
             </div>
           </div>
           <div className="flex ga-2">
