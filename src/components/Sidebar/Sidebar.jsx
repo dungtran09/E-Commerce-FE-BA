@@ -38,15 +38,15 @@ const Sidebar = () => {
       to={`/${path.PRODUCTS}/${category?.title}`}
       className={({ isActive }) =>
         isActive
-          ? "bg-main text-white px-5 pt-[15px] pb-[15px] text-base"
-          : "px-5 pt-[15px] pb-[15px] text-base hover:text-main"
+          ? "bg-main text-white p-4 text-base"
+          : "p-3 text-base hover:text-main"
       }
     >
       <div className="flex items-center">
-        <span className="pr-2 text-[22px]">
+        <span className="pr-4">
           <img
             src={category?.image}
-            className="border border-main w-[40px] h-[40px]"
+            className="w-[20px] h-[22px] object-contain"
           />
         </span>
         <span className="text-sm">
@@ -58,7 +58,7 @@ const Sidebar = () => {
 
   return (
     <div className="flex flex-col border">
-      <div className="p-1 flex items-center bg-main text-white font-medium">
+      <div className="flex items-center bg-main text-white font-medium p-1">
         <ImMenu className="mr-3 text-[20px] ml-2" />
         <span className="text-lg">All Categories</span>
       </div>

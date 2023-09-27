@@ -21,13 +21,12 @@ import Subscribe from "./Subscribe/Subscribe";
 import InputField from "./InputField/InputField";
 import Button from "./Button/Button";
 import Portal from "./Portal/Portal";
-import Error from "./Error/Error";
+import PortalToggle from "./PortalToggle/PortalToggle";
 import Loader from "./Loader/Loader";
 import Breadcrumbs from "./Breadcrumbs/Breadcrumbs";
 import Details from "./InfosProduct/Details";
 import Policy from "./Policy/Policy";
 import ImagesDetails from "./InfosProduct/ImagesDetails";
-import CounterQuanrity from "./InfosProduct/CounterQuanrity";
 import ProductInfomation from "./InfosProduct/ProductInfomation";
 import RelatedProducts from "./RelatedProducts/RelatedProducts";
 import Filter from "./Filter/Filter";
@@ -37,7 +36,21 @@ import UserRatings from "./CustomerReview/UserRatings";
 import CustomerReview from "./CustomerReview/CustomerReview";
 import Brands from "./Brands/Brands";
 import Pagination from "./Pagination/Pagination";
+import SideBarCart from "./SideBarCart/SideBarCart";
+import Billding from "./UserProfile/Billding";
+import ChangePassword from "./UserProfile/ChangePassword";
+import Invoices from "./UserProfile/Invoices";
+import UserMenuBar from "./UserProfile/UserMenuBar";
+import UserInfo from "./UserProfile/UserInfo";
+import ChangeProfile from "./UserProfile/ChangeProfile";
 export {
+  ChangeProfile,
+  UserInfo,
+  UserMenuBar,
+  Billding,
+  ChangePassword,
+  Invoices,
+  SideBarCart,
   Pagination,
   Brands,
   CustomerReview,
@@ -47,12 +60,11 @@ export {
   Filter,
   RelatedProducts,
   ProductInfomation,
-  CounterQuanrity,
   ImagesDetails,
   Policy,
   Details,
   Breadcrumbs,
-  Error,
+  PortalToggle,
   Portal,
   Loader,
   Header,

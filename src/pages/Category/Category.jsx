@@ -17,23 +17,19 @@ import {
 const Category = () => {
   const [products, setProducts] = useState(null);
   const [totalProducts, setTotalProducts] = useState(0);
-  const limit = 10;
+  const limit = 8;
   const totalPages = Math.ceil(totalProducts / limit);
   const [loadding, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [categoryBrands, setCategoryBrands] = useState(null);
   const { category } = useParams();
 
-  const { category: title } = useParams();
-
-  // const countProductsByCategory = async (categoryId) => {
-  //   const res = await apiCountCategory({ categoryId });
-  //   if (res?.status === "success") {
-  //     setCategoryId(res?.data._id);
-  //     setTotalProducts(res?.data[0]?.totalItems);
-  //   }
-  // };
-  //
+  const countProductsByCategory = async (category) => {
+    const res = await apiCountCategory({ category });
+    if (res?.status === "success") {
+      setTotalProducts(res?.data?.totalItems);
+    }
+  };
 
   const fetchCategoryBrands = async (category) => {
     const res = await apiGetProductCategories({ title: category });
@@ -55,7 +51,11 @@ const Category = () => {
 
   useEffect(() => {
     fetchCategoryBrands(category);
-    fetchProductsByCategory(currentPage, categoryBrands?._id);
+
+    if (categoryBrands?._id) {
+      fetchProductsByCategory(currentPage, categoryBrands?._id);
+      countProductsByCategory(categoryBrands?._id);
+    }
   }, [category, currentPage, categoryBrands?._id]);
 
   const productEls = products?.map((product, index) => (
@@ -67,7 +67,7 @@ const Category = () => {
   return (
     <div className="w-full">
       <section className="flex flex-col justify-center items-center h-[81px] bg-gray-100">
-        <Breadcrumbs title={title} />
+        <Breadcrumbs category={category} />
       </section>
       <div className="w-main m-auto mt-4">
         <Brands brands={categoryBrands?.brands} />

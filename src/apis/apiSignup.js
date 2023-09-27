@@ -4,6 +4,7 @@ export const apiSignup = (data) => {
   return axios({
     url: "/users/signup",
     method: "post",
+    withCredentials: false,
     data,
   });
 };

@@ -3,18 +3,16 @@ import { Link, useParams } from "react-router-dom";
 import useReactRouterBreadcrumbs from "use-react-router-breadcrumbs";
 import icons from "../../utils/icons";
 
-const Breadcrumbs = ({ category, title }) => {
+const Breadcrumbs = ({ category, title, product }) => {
   const { IoIosArrowForward } = icons;
-  const { category: cate } = useParams();
-
   const breadcrumbs = useReactRouterBreadcrumbs();
   const paths = breadcrumbs?.map((breadcrumb) => breadcrumb.key);
 
   const routers = [
     { path: paths[0], breadcrumb: "Home" },
     { path: paths[1], breadcrumb: "Products" },
-    { path: paths[2], breadcrumb: category || cate },
-    { path: paths[paths.length - 1], breadcrumb: title },
+    { path: paths[2], breadcrumb: category },
+    { path: paths[paths.length - 1], breadcrumb: product?.title },
   ];
 
   const breadcrumbsEls = breadcrumbs?.map((breadcrumb, index) => (
@@ -34,7 +32,7 @@ const Breadcrumbs = ({ category, title }) => {
 
   return (
     <div className="w-main">
-      <h3>{title?.toUpperCase()}</h3>
+      <h3>{product?.title}</h3>
       <div className="text-sm flex justify-start items-center gap-1">
         {breadcrumbsEls}
       </div>

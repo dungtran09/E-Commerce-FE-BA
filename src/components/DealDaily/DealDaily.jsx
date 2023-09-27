@@ -7,6 +7,7 @@ import { ImMenu } from "react-icons/im";
 import CountDownDealDaily from "./CountDownDealDaily";
 import { Link } from "react-router-dom";
 import path from "../../utils/path";
+import Button from "../Button/Button";
 
 const DealDaily = () => {
   const { AiFillStar } = icons;
@@ -29,7 +30,7 @@ const DealDaily = () => {
 
   return (
     <Link
-      to={`/${path.PRODUCTS}/${dealDailyProduct?.category}/${dealDailyProduct?.slug}/${dealDailyProduct?._id}`}
+      to={`/${path.PRODUCTS}/${dealDailyProduct?.categoryName}/${dealDailyProduct?.slug}/${dealDailyProduct?._id}`}
     >
       <div className="w-full border flex-auto mt-1">
         <div className="p-4">
@@ -60,12 +61,12 @@ const DealDaily = () => {
           </div>
           <CountDownDealDaily />
           <div className="w-full">
-            <button
+            <Button
               type="button"
-              className="w-full flex items-center justify-center bg-main text-white p-2 gap-2 hover:bg-gray-800 font-medium"
-            >
-              <ImMenu /> <span>Options</span>
-            </button>
+              style="w-full flex items-center justify-center bg-main text-white p-2 gap-2 hover:bg-gray-800 font-medium"
+              name="Options"
+              icon={<ImMenu />}
+            />
           </div>
         </div>
       </div>

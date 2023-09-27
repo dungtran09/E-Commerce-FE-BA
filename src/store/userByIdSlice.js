@@ -3,35 +3,34 @@ import statusCode from "../utils/statusCode";
 import * as apis from "../apis";
 
 const initialState = {
+  state: null,
   data: [],
-  status: statusCode.EDLE,
 };
 
-export const productsSlice = createSlice({
-  name: "products",
+export const userSlice = createSlice({
+  name: "userById",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getProducts.pending, (state, action) => {
+      .addCase(getUser.pending, (state, action) => {
         state.data = action.payload;
         state.status = statusCode.LOADING;
       })
-      .addCase(getProducts.fulfilled, (state, action) => {
+      .addCase(getUser.fulfilled, (state, action) => {
         state.data = action.payload;
         state.status = statusCode.EDLE;
       })
-      .addCase(getProducts.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state, action) => {
         state.data = action.payload;
         state.status = statusCode.ERROR;
       });
   },
 });
-
-export const getProducts = createAsyncThunk(
-  "products/newProducts",
-  async (data, { rejectWithValue }) => {
-    const res = await apis.apiGetProducts({ sort: "-createAt" });
+export const getUser = createAsyncThunk(
+  "users",
+  async (id, { rejectWithValue }) => {
+    const res = await apis.apiGetUser(id);
     if (res?.status !== "success") {
       return rejectWithValue(res);
     }
@@ -39,5 +38,5 @@ export const getProducts = createAsyncThunk(
   },
 );
 
-export const {} = productsSlice.actions;
-export default productsSlice.reducer;
+export const {} = userSlice.actions;
+export default userSlice.reducer;

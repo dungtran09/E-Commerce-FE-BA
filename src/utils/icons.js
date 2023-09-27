@@ -8,8 +8,12 @@ import {
   BsFillCartCheckFill,
   BsChevronLeft,
   BsChevronRight,
+  BsArrowLeft,
+  BsArrowRight,
+  BsFillEyeFill,
+  BsFillEyeSlashFill,
 } from "react-icons/bs";
-import { MdEmail, MdLocalShipping } from "react-icons/md";
+import { MdEmail, MdLocalShipping, MdKeyboardArrowDown } from "react-icons/md";
 import {
   FaUser,
   FaTabletAlt,
@@ -39,10 +43,15 @@ import { GiPositionMarker } from "react-icons/gi";
 import { GoDotFill } from "react-icons/go";
 import { SiSpringsecurity } from "react-icons/si";
 import { SiConvertio } from "react-icons/si";
-import { GrAttachment } from "react-icons/gr";
+import { GrAttachment, GrClose } from "react-icons/gr";
 import { BiSolidImageAdd } from "react-icons/bi";
-
 const icons = {
+  MdKeyboardArrowDown,
+  BsFillEyeFill,
+  BsFillEyeSlashFill,
+  BsArrowLeft,
+  BsArrowRight,
+  GrClose,
   AiOutlineSearch,
   BsChevronLeft,
   BsChevronRight,

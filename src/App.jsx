@@ -13,6 +13,8 @@ import {
   FAQs,
   ProductDetails,
   Category,
+  Cart,
+  User,
 } from "./pages";
 
 import path from "./utils/path";
@@ -33,8 +35,10 @@ function App() {
           <Route path={path.CATEGORY} element={<Category />} />
           <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
           <Route path={path.BLOGS} element={<Blogs />} />
+          <Route path={path.CART} element={<Cart />} />
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
+          <Route path={path.USER} element={<User />} />
         </Route>
         <Route path={path.LOGIN} element={<Login />} />
       </Routes>

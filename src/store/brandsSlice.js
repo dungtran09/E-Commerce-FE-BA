@@ -31,11 +31,12 @@ export const brandsSlice = createSlice({
 export const getBrands = createAsyncThunk(
   "/brands",
   async (data, { rejectWithValue }) => {
+    console.log(data);
     const res = await apis.apiGetBrands();
     if (res?.status !== "success") {
       return rejectWithValue(res);
     }
-    return res.data;
+    return res?.data;
   },
 );
 

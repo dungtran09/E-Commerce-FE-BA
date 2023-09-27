@@ -17,7 +17,7 @@ const Subscribe = () => {
           <input
             type="text"
             placeholder="Email address"
-            className="py-4 px-4 pr-0 rounded-l-full bg-[#ffffff1a] w-full outline-none placeholder:opacity-60 placeholder:text-white font-light"
+            className="py-[14px] px-4 pr-0 rounded-l-full bg-[#ffffff1a] border-none w-full outline-none placeholder:opacity-60 placeholder:text-white font-light"
           />
           <div className="text-[20px] mr-4 rounded-r-full bg-[#ffffff1a] px-4 py-4 cursor-pointer hover:text-gray-800">
             <MdEmail />

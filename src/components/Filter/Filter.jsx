@@ -3,15 +3,16 @@ import { useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import { apiGetColors, apiGetProductCategories } from "../../apis";
 
-import { prices } from "../../utils/constants";
 import icons from "../../utils/icons";
+import Button from "../Button/Button";
+import InputField from "../InputField/InputField";
 
 const Filter = ({ brands }) => {
   const { AiOutlineSearch } = icons;
   const [isToggle, setIsToggle] = useState(false);
   const [selected, setSelected] = useState([]);
   const [colors, setColors] = useState(null);
-
+  const [inputSearch, setInputSearch] = useState(null);
   const { category } = useParams();
 
   const fetchColors = async () => {
@@ -27,9 +28,9 @@ const Filter = ({ brands }) => {
 
   const { data: categories } = useSelector((status) => status.categories);
 
-  const [checkedStatePrices, setCheckedStatePrices] = useState(
-    new Array(prices.length).fill(false),
-  );
+  // const [checkedStatePrices, setCheckedStatePrices] = useState(
+  //   new Array(prices.length).fill(false),
+  // );
 
   const [checkedStateColors, setCheckedStateColors] = useState(
     new Array(colors?.length).fill(false),
@@ -39,19 +40,19 @@ const Filter = ({ brands }) => {
     new Array(categories?.brand?.length).fill(false),
   );
 
-  const handlerOnChangePrices = (position, value) => {
-    const hasValue = selected?.find((v) => v === value);
-    if (hasValue) {
-      setSelected((prev) => prev?.filter((v) => v !== value));
-    } else {
-      setSelected((prev) => [...prev, value]);
-    }
-    const updatedCheckedStatePrices = checkedStatePrices?.map((item, index) => {
-      return index === position ? !item : item;
-    });
-
-    setCheckedStatePrices(updatedCheckedStatePrices);
-  };
+  // const handlerOnChangePrices = (position, value) => {
+  //   const hasValue = selected?.find((v) => v === value);
+  //   if (hasValue) {
+  //     setSelected((prev) => prev?.filter((v) => v !== value));
+  //   } else {
+  //     setSelected((prev) => [...prev, value]);
+  //   }
+  //   const updatedCheckedStatePrices = checkedStatePrices?.map((item, index) => {
+  //     return index === position ? !item : item;
+  //   });
+  //
+  //   setCheckedStatePrices(updatedCheckedStatePrices);
+  // };
 
   const handlerOnChangeColors = (position, value) => {
     const hasValue = selected?.find((v) => v === value);
@@ -132,7 +133,6 @@ const Filter = ({ brands }) => {
           id={`hs-list-group-item-checkbox-cate-${brand?._id}`}
           className="border-gray-200 h-5 w-5 cursor-pointer"
           name={brand?.title}
-          value={brand?.title}
           checked={checkedStateBrands[brand?._id]}
           onChange={() => handlerOnChangeBrands(brand?._id, brand?.title)}
         />
@@ -147,47 +147,72 @@ const Filter = ({ brands }) => {
   ));
   return (
     <>
-      <div className="w-full shadow p-5 bg-white">
+      <div className="w-full border p-5 bg-white">
         <div className="relative">
           <div className="absolute flex items-center ml-2 h-full">
             <AiOutlineSearch />
           </div>
 
-          <input
-            type="text"
-            placeholder="Search by listing, location, bedroom number..."
-            className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"
+          <InputField
+            value={inputSearch}
+            onChange={() => setInputSearch}
+            fieldName="Search..."
           />
         </div>
 
         <div className="flex items-center justify-between mt-4">
-          <button
-            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
-            onClick={() => setIsToggle(!isToggle)}
-          >
-            Filters ({selected.length || 0})
-          </button>
+          <Button
+            style="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
+            onClickHandler={() => setIsToggle(!isToggle)}
+            name={`Filter (${selected.length || 0})`}
+          />
 
-          <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md">
-            Reset Filter
-          </button>
+          <Button
+            style="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md"
+            name="Reset Filter"
+          />
         </div>
 
         {isToggle && (
           <div className="w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
               <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                <span className="text-lg font-semibold">Brands</span>
+                <label
+                  htmlFor="Brands"
+                  className="block text-sm font-medium text-gray-900"
+                >
+                  Brands
+                </label>
                 {brandEls}
               </div>
 
               <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                <span className="text-lg font-semibold">Prices</span>
-                {}
+                <label
+                  htmlFor="Prices"
+                  className="block text-sm font-medium text-gray-900"
+                >
+                  Prices
+                </label>
+
+                <select
+                  name="HeadlineAct"
+                  id="HeadlineAct"
+                  className="mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm"
+                >
+                  <option value="">100000-200000</option>
+                  <option value="JM">1500000-2500000</option>
+                  <option value="SRV">3000000-4500000</option>
+                  <option value="JH">50000000-60000000</option>
+                </select>
               </div>
 
               <div className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
-                <span className="text-lg font-semibold">Colors</span>
+                <label
+                  htmlFor="Colors"
+                  className="block text-sm font-medium text-gray-900"
+                >
+                  Colors
+                </label>
                 {}
               </div>
             </div>

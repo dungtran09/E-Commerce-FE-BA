@@ -5,18 +5,41 @@ import newProduct from "../../assets/new.png";
 import tredingProduct from "../../assets/trending.png";
 import SelectOption from "../SelectOptions/SelectOption";
 import icons from "../../utils/icons";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import path from "../../utils/path";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../store/cartSlice";
+import QuickReview from "./QuickReview";
 
-const Product = ({ product, isNew, category }) => {
-  const { AiFillEye, IoMdMenu, BsHeartFill } = icons;
+const Product = ({ product, isNew }) => {
+  const { AiFillEye, IoMdMenu, BsFillCartCheckFill } = icons;
+  const [isQuickView, setIsQuickView] = useState(false);
+  const dispatch = useDispatch();
+  const onAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  const showQuickView = () => {
+    setIsQuickView(true);
+  };
+
+  const hideQuickView = () => {
+    setIsQuickView(false);
+  };
 
   const [isShowSelectOption, setIsShowSelectOption] = useState(false);
   return (
-    <div className="w-full text-base">
-      <div className="flex flex-col items-center p-2 bg-white border border-gray-200 shadow">
-        <Link
-          to={`/${path.PRODUCTS}/${category}/${product.slug}/${product?._id}`}
+    <>
+      {isQuickView && (
+        <QuickReview
+          showQuickView={showQuickView}
+          hideQuickView={hideQuickView}
+          product={product}
+        />
+      )}
+      <div className="w-full text-base cursor-pointer hover:shadow-xl">
+        <div
+          className="flex flex-col items-center p-3 bg-white border border-gray-200 shadow"
           onMouseEnter={(e) => {
             e.stopPropagation();
             setIsShowSelectOption(true);
@@ -29,16 +52,38 @@ const Product = ({ product, isNew, category }) => {
           <div className="w-full relative flex justify-center items-center">
             {isShowSelectOption && (
               <div className="absolute left-0 right-0 bottom-0 flex justify-center gap-3 animate-slide-top">
-                <SelectOption icon={<BsHeartFill />} />
-                <SelectOption icon={<IoMdMenu />} />
-                <SelectOption icon={<AiFillEye />} />
+                <SelectOption
+                  icon={
+                    <BsFillCartCheckFill
+                      size={20}
+                      onClick={() => onAddToCart(product)}
+                    />
+                  }
+                />
+                <Link
+                  to={`/${path.PRODUCTS}/${product?.categoryName}/${product?.slug}/${product?._id}`}
+                >
+                  <SelectOption icon={<IoMdMenu size={20} />} />
+                </Link>
+                <SelectOption
+                  icon={
+                    <AiFillEye
+                      size={20}
+                      onClick={() => setIsQuickView(!isQuickView)}
+                    />
+                  }
+                />
               </div>
             )}
-            <img
-              src={product?.thumb || productImgPlaceHolder}
-              alt={product.name}
-              className="w-[200px] h-[170px] object-fill"
-            />
+            <Link
+              to={`/${path.PRODUCTS}/${product?.categoryName}/${product?.slug}/${product?._id}`}
+            >
+              <img
+                src={product?.thumb || productImgPlaceHolder}
+                alt={product?.title}
+                className="w-[200px] h-[200px] object-fill cursor-pointer"
+              />
+            </Link>
             {isNew && (
               <img
                 src={isNew === 1 ? tredingProduct : newProduct}
@@ -48,15 +93,19 @@ const Product = ({ product, isNew, category }) => {
             )}
           </div>
           <div className="flex flex-col gap-2 w-full mt-[15px] items-start">
-            <span className="line-clamp-1">{product?.title}</span>
-            <span className="flex flex-row h-4">
-              {calcRating(product.totalRatings)}
+            <span className="line-clamp-1 mb-2 text-ms font-medium leading-tight text-neutral-800">
+              {product?.title}
             </span>
-            <span className="">{formatNumber(product?.price)} VND</span>
+            <span className="flex flex-row h-4">
+              {calcRating(product?.totalRatings)}
+            </span>
+            <span className="text-main text-sm">
+              {formatNumber(product?.price)} VND
+            </span>
           </div>
-        </Link>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

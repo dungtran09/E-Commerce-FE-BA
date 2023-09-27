@@ -7,8 +7,11 @@ import FAQs from "./FAQs/FAQs";
 import OutService from "./OutService/OutService";
 import Blogs from "./Blogs/Blogs";
 import Category from "./Category/Category";
-
+import Cart from "./Cart/Cart";
+import User from "./User/User";
 export {
+  User,
+  Cart,
   Category,
   Public,
   Home,

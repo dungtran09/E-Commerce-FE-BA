@@ -9,7 +9,7 @@ const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState(null);
   const fetchProducts = async () => {
     const response = await apiGetProducts({
-      totalRatings: { gt: 4 },
+      totalRatings: { gt: 4.5 },
       sort: "-price",
     });
 
@@ -30,7 +30,7 @@ const FeaturedProducts = () => {
       price={product?.price}
       totalRatings={product?.totalRatings}
       _id={product?._id}
-      category={product?.category}
+      category={product?.categoryName}
       slug={product?.slug}
     />
   ));

@@ -33,9 +33,8 @@ export const getProductCategories = createAsyncThunk(
   "products/productCategories",
   async (data, { rejectWithValue }) => {
     const res = await apis.apiGetProductCategories();
-    // console.log(res);
     if (res?.status !== "success") return rejectWithValue(res);
-    return res.data;
+    return res?.data;
   },
 );
 export const {} = productCategoriesSlice.actions;

@@ -8,15 +8,17 @@ import userSlice from "./userSlice";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import brands from "./brandsSlice";
+import cartSlice from "./cartSlice";
+import userByIdSlice from "./userByIdSlice";
 
 const commonConfig = {
-  key: "jwt/user",
+  key: "jwt",
   storage,
 };
 
 const userConfig = {
   ...commonConfig,
-  whitelist: ["isLoggedIn", "token"],
+  whitelist: ["isLoggedIn", "token", "data"],
 };
 
 export const store = configureStore({
@@ -24,7 +26,9 @@ export const store = configureStore({
     categories: productCategoriesSlice,
     products: productsSlice,
     brands: brands,
+    carts: cartSlice,
     user: persistReducer(userConfig, userSlice),
+    userById: userByIdSlice,
   },
   middleware: [thunk, logger],
 });

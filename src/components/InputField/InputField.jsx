@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const InputField = (props) => {
-  const { value, setValue, keyName, fieldName, type, errMsg, isErr } = props;
+  const {
+    value,
+    setValue,
+    keyName,
+    fieldName,
+    type,
+    errMsg,
+    isErr,
+    style,
+    icons,
+    showPassword,
+    onShowPasswordHandler,
+    classNameInput,
+  } = props;
   const [isDisplay, setIsDisplay] = useState(false);
 
   const handleInputBlur = () => {
@@ -11,28 +24,53 @@ const InputField = (props) => {
     setIsDisplay(false);
   };
 
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current.classList.contains("invalid")) {
+    } else {
+    }
+  });
+
+  const onHandlerInputChange = (e) => {
+    setValue((prev) => ({ ...prev, [keyName]: e.target?.value }));
+  };
+
   return (
     <>
-      <div className="w-full relative py-2">
+      <div className="w-full flex flex-col relative py-2">
         <label
-          className="absolute top-0 text-[13px] text-white"
+          className="absolute top-0 text-[13px] font-semibold text-gray-800"
           htmlFor={fieldName}
         >
           {fieldName}
         </label>
-        <input
-          type={type || "text"}
-          className="px-4 py-3 w-full my-4 mb-1 outline-none bg-white boder rounded-lg text-sm text-gray-900"
-          placeholder={fieldName}
-          value={value}
-          onChange={(e) =>
-            setValue((prev) => ({ ...prev, [keyName]: e.target.value }))
-          }
-          onBlur={handleInputBlur}
-          onFocus={handleInputFocus}
-        />
+        <div className="flex justify-between items-center">
+          <input
+            ref={ref}
+            type={showPassword ? "text" : type}
+            className={
+              style
+                ? style
+                : `${
+                    isErr ? classNameInput : "valid"
+                  } px-4 py-3 w-full my-4 mb-1 pe-10 outline-none bg-white boder border-gray-200 rounded-lg text-sm text-gray-900`
+            }
+            placeholder={fieldName}
+            value={value}
+            onChange={(e) => onHandlerInputChange(e)}
+            onBlur={handleInputBlur}
+            onFocus={handleInputFocus}
+          />
+          <span
+            className="ml-[-30px] cursor-pointer"
+            onClick={() => onShowPasswordHandler && onShowPasswordHandler()}
+          >
+            {showPassword ? icons?.showEye : icons?.hideEye}
+          </span>
+        </div>
         {isDisplay && isErr && (
-          <p className="text-[11px] text-main font-medium">{errMsg}</p>
+          <p className="text-[11px] text-main">{errMsg}</p>
         )}
       </div>
     </>

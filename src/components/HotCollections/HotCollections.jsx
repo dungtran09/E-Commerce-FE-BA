@@ -10,15 +10,13 @@ const HotCollections = () => {
     (state) => state?.categories,
   );
 
-  console.log(categories);
-
   const categoriesEls = categories?.map((category, index) => (
-    <div key={index} className="flex-initial border w-[396px] flex">
+    <div key={index} className="flex-initial border w-[395px] flex">
       <div className="flex-1">
         <img
           src={category?.image}
           alt="image"
-          className="w-[120px] h-[105px]"
+          className="w-[100%] h-[70px] p-2 object-contain"
         />
       </div>
       <div className="p-2 flex-1">
@@ -41,7 +39,7 @@ const HotCollections = () => {
   return (
     <>
       <Title title="Hot Collections" />
-      <div className="flex flex-wrap gap-4 mt-4 min-h-[202px]">
+      <div className="flex flex-wrap gap-3 mt-4 min-h-[202px]">
         {categoriesEls}
       </div>
     </>

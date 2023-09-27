@@ -54,6 +54,9 @@ export const isPasswordSecure = (password) => {
 };
 
 export const checkConfirmPassword = (password, passwordConfirm) => {
+  if (passwordConfirm === "" || password === "") {
+    return false;
+  }
   passwordConfirm = passwordConfirm?.trim();
   password = password?.trim();
   return passwordConfirm === password;

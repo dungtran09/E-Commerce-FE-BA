@@ -15,7 +15,7 @@ const Products = () => {
           <img
             src={cate?.image}
             alt="Product"
-            className="w-full h-[250px] object-cover rounded-t-xl"
+            className="w-full p-10 h-[250px] object-contain"
           />
           <div className="px-4 py-3 w-72">
             <span className="text-gray-400 mr-3 uppercase text-xs">

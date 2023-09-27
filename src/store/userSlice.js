@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import statusCode from "../utils/statusCode";
 
 const initialState = {
   isLoggedIn: false,
@@ -11,7 +12,6 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     signup: (state, action) => {
-      console.log(action);
       state.isLoggedIn = true;
       state.data = action.payload.data;
       state.token = action.payload.token;

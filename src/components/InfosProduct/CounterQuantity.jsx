@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CounterQuanrity = () => {
+const CounterQuantity = () => {
   let [counter, setCounter] = useState(1);
   return (
     <>
@@ -27,4 +27,4 @@ const CounterQuanrity = () => {
   );
 };
 
-export default CounterQuanrity;
+export default CounterQuantity;

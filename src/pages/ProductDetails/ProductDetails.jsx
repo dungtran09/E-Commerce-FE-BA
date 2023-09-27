@@ -15,8 +15,6 @@ const ProductDetails = () => {
     }
   };
 
-  console.log(product);
-
   useEffect(() => {
     fetchProduct();
   }, [id]);
@@ -24,13 +22,13 @@ const ProductDetails = () => {
   return (
     <div className="w-full">
       <section className="flex flex-col justify-center items-center h-[81px] bg-gray-100">
-        <Breadcrumbs category={category} title={title} />
+        <Breadcrumbs category={category} title={title} product={product} />
       </section>
       <section className="w-main m-auto flex flex-col mt-4">
         <Details product={product} />
       </section>
       <section className="w-main m-auto flex flex-col mt-4">
-        <ProductInfomation />
+        <ProductInfomation product={product} />
       </section>
       <section className="w-main m-auto flex flex-col mt-4">
         <RelatedProducts category={product?.category} />
