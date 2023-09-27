@@ -15,6 +15,7 @@ import {
   Category,
   Cart,
   User,
+  Search,
 } from "./pages";
 
 import path from "./utils/path";
@@ -39,6 +40,7 @@ function App() {
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
           <Route path={path.USER} element={<User />} />
+          <Route path={path.SEARCH} element={<Search />} />
         </Route>
         <Route path={path.LOGIN} element={<Login />} />
       </Routes>

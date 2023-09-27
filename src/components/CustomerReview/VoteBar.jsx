@@ -1,24 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import icons from "../../utils/icons";
 
-const VoteBar = () => {
+const VoteBar = ({ totalRatings }) => {
   const { AiFillStar, AiOutlineStar } = icons;
+  const [stars, setStars] = useState(0);
+
+  useEffect(() => {
+    let stars = [];
+    for (let i = 0; i < totalRatings; i++) {
+      stars.push(<AiFillStar key={i} />);
+    }
+
+    setStars(stars);
+  }, [totalRatings]);
+
   return (
     <>
       <div className="w-full m-auto rounded-lg bg-gray-50 p-4">
         <div className="flex mb-2 text-yellow-400">
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiFillStar />
-          <AiOutlineStar />
+          {stars}
           <p className="ml-2 text-sm font-medium text-gray-900">
-            4.95 out of 5
+            {totalRatings} out of 5
           </p>
         </div>
-        <p className="text-sm font-medium text-gray-500">
-          1,745 global ratings
-        </p>
+        <p className="text-sm font-medium text-gray-500"></p>
         <div className="flex items-center mt-2">
           5 star
           <div className="flex-1 h-3 mx-4 bg-gray-200 rounded">

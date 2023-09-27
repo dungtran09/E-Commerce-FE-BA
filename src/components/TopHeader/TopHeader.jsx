@@ -69,10 +69,7 @@ const TopHeader = () => {
 
   return (
     <>
-      <header
-        className="h-[38px] w-full bg-main text-white flex justify-center items-center"
-        ref={catMenu}
-      >
+      <header className="h-[38px] w-full bg-main text-white flex justify-center items-center">
         <div className="w-main flex justify-between text-xs">
           <div className="flex justify-center items-center gap-1">
             <span className="border-r border-b-gray-300 pr-2">
@@ -81,9 +78,12 @@ const TopHeader = () => {
             <BsCurrencyDollar />
             <p className="cursor-pointer hover:text-gray-700"> VND</p>
           </div>
-          <div className="flex justify-center items-center gap-3 font-semibold">
+          <div
+            className="flex justify-center items-center gap-3 font-semibold"
+            ref={catMenu}
+          >
             {iconsEls}
-            <div className="relative" ref={catMenu}>
+            <div className="relative">
               <div className="inline-flex items-center overflow-hidden rounded-md bg-[#9a3b3b54]">
                 {isLogged && user !== null ? (
                   <Link

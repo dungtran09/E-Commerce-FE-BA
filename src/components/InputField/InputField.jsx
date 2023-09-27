@@ -30,7 +30,7 @@ const InputField = (props) => {
     if (ref.current.classList.contains("invalid")) {
     } else {
     }
-  });
+  }, []);
 
   const onHandlerInputChange = (e) => {
     setValue((prev) => ({ ...prev, [keyName]: e.target?.value }));

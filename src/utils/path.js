@@ -8,6 +8,7 @@ const path = {
   SERVICES: "Services",
   USER: "user",
   CART: "my-cart",
+  SEARCH: "search",
   FAQS: "Faqs",
   DETAILS_PRODUCT: "Products/:category/:title/:id",
   ALL: "*",

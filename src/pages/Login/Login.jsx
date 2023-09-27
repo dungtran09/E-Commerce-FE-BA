@@ -53,11 +53,12 @@ const Login = () => {
   const [isSignup, setIsSinup] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [infos, setInfos] = useState(null);
-  const [isError, setIsError] = useState(false);
+  const [status, setStatus] = useState(false);
   const [classNameInput, setClassNameInput] = useState("invalid");
 
   // Using for:  disabled button login or signup if All fields invalid
   const [fielsIsValid, setFieldsIsValid] = useState(false);
+  const [messege, setMessage] = useState("");
 
   const onShowPasswordHandler = () => {
     setShowPassword(!showPassword);
@@ -213,18 +214,18 @@ const Login = () => {
     userSignup,
     isSignup,
     userLogin,
-    isError,
+    status,
     fielsIsValid,
     inputsLogin,
     inputsSignup,
   ]);
 
   const showStatus = () => {
-    setIsError(true);
+    setStatus(true);
   };
 
   const hideStatus = () => {
-    setIsError(false);
+    setStatus(false);
   };
 
   const onClickHandler = useCallback(async () => {
@@ -232,24 +233,31 @@ const Login = () => {
     if (isSignup) {
       setIsLoading(true);
       response = await apiSignup(payload);
+      if (response?.status === "success") {
+        setIsLoading(false);
+        setMessage("Sinup successfully. Please login to goto Home Page.");
+        setIsSinup(false);
+      } else {
+        setMessage("The Email has been registered, Please try choose another.");
+        setIsLoading(false);
+      }
     } else {
       setIsLoading(true);
       response = await apiLogin(payload);
-    }
-
-    if (response?.status === "success") {
-      dispatch(signup({ token: response?.token, data: response?.data }));
-      setIsLoading(false);
-      navigate(`/${path.HOME}`);
-      window.location.reload(true);
-      window.location.reload(false);
+      if (response?.status === "success") {
+        dispatch(signup({ token: response?.token, data: response?.data }));
+        setIsLoading(false);
+        navigate(`/${path.HOME}`);
+        window.location.reload(true);
+        window.location.reload(false);
+      } else {
+        setMessage("Email or Password is not correct. Please try again.");
+        setIsLoading(false);
+      }
     }
     setInfos(response);
-    setIsError(true);
-    setIsLoading(false);
+    setStatus(true);
   }, [isSignup, payload]);
-
-  console.log(fielsIsValid);
 
   return (
     <>
@@ -262,10 +270,10 @@ const Login = () => {
             {isSignup ? signupEls : loginEls}
             <button
               className={`${
-                !fielsIsValid && !isError ? "bg-gray-200 " : "bg-main "
+                !fielsIsValid ? "bg-gray-200 " : "bg-main "
               } flex w-full gap-2 justify-center items-center px-4 py-2 rounded-lg text-white text-semibold mt-4 hover:opacity-80`}
               onClick={() => onClickHandler()}
-              disabled={!fielsIsValid && !isError}
+              disabled={!fielsIsValid}
             >
               {isSignup ? "Sign up" : "Login"}
             </button>
@@ -280,10 +288,10 @@ const Login = () => {
                 {isSignup ? "< Login" : "Create one?"}
               </span>
               {isLoading && <Loader />}
-              {isError && (
+              {status && (
                 <PortalToggle
-                  status="Error"
-                  message={infos?.message}
+                  status={infos?.status}
+                  message={messege}
                   showStatus={showStatus}
                   hideStatus={hideStatus}
                 />

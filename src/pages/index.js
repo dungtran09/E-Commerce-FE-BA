@@ -9,7 +9,9 @@ import Blogs from "./Blogs/Blogs";
 import Category from "./Category/Category";
 import Cart from "./Cart/Cart";
 import User from "./User/User";
+import Search from "./Search/Search";
 export {
+  Search,
   User,
   Cart,
   Category,

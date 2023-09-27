@@ -31,3 +31,11 @@ export const apiCountCategory = (params) => {
     params,
   });
 };
+
+export const apiGetProductsByStringSearchFields = (params) => {
+  return axios({
+    url: "/products/search",
+    method: "get",
+    params,
+  });
+};

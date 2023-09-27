@@ -1,22 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import icons from "../../utils/icons";
 import Button from "../Button/Button";
 import Star from "./Star";
 import UserRatings from "./UserRatings";
 import VoteBar from "./VoteBar";
 import { PortalToggle } from "../";
-import { apiRatings } from "../../apis";
+import { apiGetProduct, apiRatings } from "../../apis";
 
 const CustomerReview = ({ product }) => {
   const { BiSolidImageAdd, GrAttachment, GiPositionMarker } = icons;
 
-  const [reviews, setReviews] = useState([]);
-  const [updateReviews, setUpdateReviews] = useState(false);
-  const [isReviewAdded, setIsReviewAdded] = useState(false);
-  const [review, setReview] = useState({});
+  const [user, setUser] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
+  let [token, setToken] = useState(null);
 
+  const [reviews, setReviews] = useState([]);
+  const [totalRatings, setTotalRatings] = useState(0);
+  const [review, setReview] = useState({});
   const [rating, setRating] = React.useState(0);
   const [selection, setSelection] = React.useState(0);
+  const [updatedProduct, setUpdatedProduct] = useState(product);
+
+  const tokenObj = JSON.parse(localStorage.getItem("persist:jwt"));
+  useEffect(() => {
+    if (tokenObj?.isLoggedIn === "true" && tokenObj?.data) {
+      let user = JSON.parse(tokenObj?.data);
+      let newToken = tokenObj?.token.split('"');
+
+      setUser(user);
+      setIsLogged(true);
+      setToken(newToken[1]);
+    }
+  }, [token, review, rating, reviews, totalRatings]);
+
+  const fetchRatings = async () => {
+    token = `authorization: bearer ${token}`;
+    const res = await apiRatings(review, product?._id, token);
+    if (res?.status === "success") {
+      const resProductUpdated = await apiGetProduct(product?._id);
+      if (resProductUpdated.status === "success") {
+        setUpdatedProduct(resProductUpdated?.data);
+        setReviews(updatedProduct?.ratings);
+        setTotalRatings(updatedProduct?.totalRatings);
+        setReview(null);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchRatings();
+  }, []);
 
   const [isError, setIsError] = useState(false);
 
@@ -43,20 +76,18 @@ const CustomerReview = ({ product }) => {
   };
 
   const handlerOnSubmit = async () => {
-    if (!review.text || !review.star) {
+    if (!review?.text || !review?.star || !isLogged) {
       setIsError(true);
       return;
     }
-    if (review.text && review.star && product?._id) {
-      const res = await apiRatings(review, product?._id);
-      console.log(res);
+    if (review.text && review.star && product?._id && isLogged && token) {
+      fetchRatings();
     }
   };
 
   return (
     <>
       <div className="flex flex-col justify-center items-center p-4">
-        <VoteBar />
         <div className="w-full mt-4">
           <form>
             <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50">
@@ -68,6 +99,7 @@ const CustomerReview = ({ product }) => {
                   placeholder="Write a comment..."
                   required
                   onChange={handlerReviewText}
+                  value={review !== null ? review?.text : ""}
                 ></textarea>
               </div>
               <div className="flex flex-col justify-center items-center my-4">
@@ -132,7 +164,7 @@ const CustomerReview = ({ product }) => {
             </div>
           </form>
         </div>
-        <UserRatings />
+        <UserRatings reviews={reviews} />
       </div>
     </>
   );

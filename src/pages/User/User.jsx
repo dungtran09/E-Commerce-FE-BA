@@ -30,7 +30,7 @@ const User = () => {
   return (
     <div className="w-main grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
       <div className="rounded-lg">
-        {isShowOn && <UserMenuBar setIdEl={setIdEl} idEl={idEl} />}
+        {isShowOn && <UserMenuBar setIdEl={setIdEl} idEl={idEl} user={user} />}
       </div>
       <div className="rounded-lg border p-4 lg:col-span-2">
         <div className="flex justify-between ">

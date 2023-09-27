@@ -5,7 +5,13 @@ const PortalToggle = ({ status, message, showStatus, hideStatus, refresh }) => {
   return createPortal(
     <>
       <div className={`alert ${showStatus ? "" : "hidden"}`}>
-        <h2 className="text-sm font-semibold text-main">{status}:</h2>
+        <h2
+          className={`${
+            status === "success" ? "text-green-700" : "text-main"
+          } text-sm font-bold`}
+        >
+          {status?.toUpperCase()}:
+        </h2>
         <p className="text-sm">{message}</p>
         <button
           className="inline-block rounded bg-main px-6 pb-2 pt-2 mt-4 text-xs font-medium text-white hover:opacity-70"

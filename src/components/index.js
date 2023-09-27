@@ -43,7 +43,11 @@ import Invoices from "./UserProfile/Invoices";
 import UserMenuBar from "./UserProfile/UserMenuBar";
 import UserInfo from "./UserProfile/UserInfo";
 import ChangeProfile from "./UserProfile/ChangeProfile";
+import SearchGlobal from "./SearchGlobal/SearchGlobal";
+import LoaderSm from "./Loader/LoaderSm";
 export {
+LoaderSm,
+  SearchGlobal,
   ChangeProfile,
   UserInfo,
   UserMenuBar,
