@@ -7,25 +7,18 @@ import {
   Billding,
   ChangeProfile,
 } from "../../components/";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../store/userByIdSlice";
-import jwt_decode from "jwt-decode";
 
 const User = () => {
-  const dispatch = useDispatch();
   const [isShowOn, setIsShowOn] = useState(true);
   const [idEl, setIdEl] = useState("user-info");
+  const [user, setUser] = useState(null);
 
+  const userObj = JSON.parse(localStorage.getItem("userInfos"));
   useEffect(() => {
-    const tokenObj = JSON.parse(localStorage.getItem("persist:jwt"));
-    if (tokenObj?.isLoggedIn === "true" && tokenObj?.token) {
-      const token = tokenObj?.token;
-      const decodeToken = jwt_decode(token);
-      dispatch(getUser(decodeToken?.id));
+    if (userObj) {
+      setUser(userObj);
     }
-  }, []);
-
-  const { data: user, status } = useSelector((state) => state.userById);
+  }, [userObj]);
 
   return (
     <div className="w-main grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">

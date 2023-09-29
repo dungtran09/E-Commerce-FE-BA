@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { apiGetProduct } from "../../apis";
 import { Details, ProductInfomation, RelatedProducts } from "../../components";
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
+import statusCode from "../../utils/statusCode";
 
 const ProductDetails = () => {
   const { category, title, id } = useParams();
@@ -10,7 +11,7 @@ const ProductDetails = () => {
 
   const fetchProduct = async () => {
     const res = await apiGetProduct(id);
-    if (res.status === "success") {
+    if (res.status === statusCode.SUCCESS) {
       setProduct(res.data);
     }
   };

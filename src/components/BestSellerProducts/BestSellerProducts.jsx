@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { apiGetProducts } from "../../apis";
 import { Product, SliderControl, SubBanner } from "../";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../store/productsSlice";
+import { getProducts } from "../../store/slices/productsSlice";
+import statusCode from "../../utils/statusCode";
 
 const tabs = [
   {
@@ -24,7 +25,7 @@ const BestSellerProducts = () => {
   const fetchProducts = async () => {
     const res = await apiGetProducts({ sort: "-sold" });
 
-    if (res?.status === "success") {
+    if (res?.status === statusCode.SUCCESS) {
       setBestSellerProducts(res?.data);
       setProducts(res?.data);
     }

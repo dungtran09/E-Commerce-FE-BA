@@ -13,7 +13,6 @@ const InputField = (props) => {
     icons,
     showPassword,
     onShowPasswordHandler,
-    classNameInput,
   } = props;
   const [isDisplay, setIsDisplay] = useState(false);
 
@@ -52,9 +51,7 @@ const InputField = (props) => {
             className={
               style
                 ? style
-                : `${
-                    isErr ? classNameInput : "valid"
-                  } px-4 py-3 w-full my-4 mb-1 pe-10 outline-none bg-white boder border-gray-200 rounded-lg text-sm text-gray-900`
+                : `px-4 py-3 w-full my-4 mb-1 pe-10 outline-none bg-white boder border-gray-200 rounded-lg text-sm text-gray-900`
             }
             placeholder={fieldName}
             value={value}
@@ -63,7 +60,7 @@ const InputField = (props) => {
             onFocus={handleInputFocus}
           />
           <span
-            className="ml-[-30px] cursor-pointer"
+            className="ml-[-30px] mt-[10px] mr-[10px] cursor-pointer"
             onClick={() => onShowPasswordHandler && onShowPasswordHandler()}
           >
             {showPassword ? icons?.showEye : icons?.hideEye}

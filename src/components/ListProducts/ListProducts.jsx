@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { apiGetProducts } from "../../apis";
+import statusCode from "../../utils/statusCode";
 import Product from "../Product/Product";
 
 const ListProducts = () => {
@@ -7,7 +8,7 @@ const ListProducts = () => {
 
   const fetchProducts = async () => {
     const res = await apiGetProducts();
-    if (res?.status === "success") {
+    if (res?.status === statusCode.SUCCESS) {
       setProducts(res?.data);
     }
   };

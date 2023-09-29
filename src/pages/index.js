@@ -10,7 +10,9 @@ import Category from "./Category/Category";
 import Cart from "./Cart/Cart";
 import User from "./User/User";
 import Search from "./Search/Search";
+import Signup from "./Signup/Signup";
 export {
+  Signup,
   Search,
   User,
   Cart,

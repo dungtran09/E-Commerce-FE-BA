@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { getProductCategories } from "./store/productCategoriesSlice";
+import { getProductCategories } from "./store/slices/productCategoriesSlice";
 import { useDispatch } from "react-redux";
 
 import {
@@ -16,6 +16,7 @@ import {
   Cart,
   User,
   Search,
+  Signup,
 } from "./pages";
 
 import path from "./utils/path";
@@ -25,7 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getProductCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen font-main">
@@ -43,6 +44,7 @@ function App() {
           <Route path={path.SEARCH} element={<Search />} />
         </Route>
         <Route path={path.LOGIN} element={<Login />} />
+        <Route path={path.SIGNUP} element={<Signup />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import statusCode from "../utils/statusCode";
-import * as apis from "../apis";
+import statusCode from "../../utils/statusCode";
+import * as apis from "../../apis";
 
 const initialState = {
   state: null,
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.data = action.payload;
-        state.status = statusCode.EDLE;
+        state.status = statusCode.SUCCESS;
       })
       .addCase(getUser.rejected, (state, action) => {
         state.data = action.payload;

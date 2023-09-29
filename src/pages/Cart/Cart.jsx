@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components";
-import { removeProduct } from "../../store/cartSlice";
+import { removeProduct } from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 
@@ -11,7 +11,6 @@ const Cart = () => {
   const cartProducts = useSelector((state) => state.carts);
 
   const onRemoveFromCarts = (id) => {
-    console.log(id);
     dispatch(removeProduct(id));
   };
 

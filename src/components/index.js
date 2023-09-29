@@ -45,8 +45,10 @@ import UserInfo from "./UserProfile/UserInfo";
 import ChangeProfile from "./UserProfile/ChangeProfile";
 import SearchGlobal from "./SearchGlobal/SearchGlobal";
 import LoaderSm from "./Loader/LoaderSm";
+import LoaderLg from "./Loader/LoaderLg";
 export {
-LoaderSm,
+  LoaderLg,
+  LoaderSm,
   SearchGlobal,
   ChangeProfile,
   UserInfo,

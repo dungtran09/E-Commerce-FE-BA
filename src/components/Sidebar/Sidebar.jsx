@@ -1,32 +1,11 @@
-import React, { useEffect } from "react";
-import { ImMenu } from "react-icons/im";
+import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import icons from "../../utils/icons";
 import path from "../../utils/path";
 
 const Sidebar = () => {
-  const {
-    FiHeadphones,
-    PiTelevisionSimpleBold,
-    GiVibratingSmartphone,
-    FaTabletAlt,
-    FiCamera,
-    FaLaptop,
-    BsSpeaker,
-    FiPrinter,
-  } = icons;
-
-  const iconsProductCategories = [
-    <FaTabletAlt />,
-    <FaLaptop />,
-    <BsSpeaker />,
-    <FiCamera />,
-    <FiPrinter />,
-    <PiTelevisionSimpleBold />,
-    <FiHeadphones />,
-    <GiVibratingSmartphone />,
-  ];
+  const { ImMenu } = icons;
 
   const { data: categories, status } = useSelector(
     (state) => state?.categories,

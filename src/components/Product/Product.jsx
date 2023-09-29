@@ -5,10 +5,10 @@ import newProduct from "../../assets/new.png";
 import tredingProduct from "../../assets/trending.png";
 import SelectOption from "../SelectOptions/SelectOption";
 import icons from "../../utils/icons";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import path from "../../utils/path";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/cartSlice";
+import { addToCart } from "../../store/slices/cartSlice";
 import QuickReview from "./QuickReview";
 
 const Product = ({ product, isNew }) => {

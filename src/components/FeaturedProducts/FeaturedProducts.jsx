@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGetProducts } from "../../apis/apiProducts";
 import path from "../../utils/path";
+import statusCode from "../../utils/statusCode";
 import Title from "../Title/Title";
 import FeaturedProductCard from "./FeaturedProductCard";
 
@@ -13,7 +14,7 @@ const FeaturedProducts = () => {
       sort: "-price",
     });
 
-    if (response?.status === "success") {
+    if (response?.status === statusCode.SUCCESS) {
       setFeaturedProducts(response.data);
     }
   };

@@ -12,6 +12,8 @@ import {
   BsArrowRight,
   BsFillEyeFill,
   BsFillEyeSlashFill,
+  BsArrowDown,
+  BsArrowUp,
 } from "react-icons/bs";
 import { MdEmail, MdLocalShipping, MdKeyboardArrowDown } from "react-icons/md";
 import {
@@ -45,7 +47,10 @@ import { SiSpringsecurity } from "react-icons/si";
 import { SiConvertio } from "react-icons/si";
 import { GrAttachment, GrClose } from "react-icons/gr";
 import { BiSolidImageAdd } from "react-icons/bi";
+
 const icons = {
+  BsArrowDown,
+  BsArrowUp,
   MdKeyboardArrowDown,
   BsFillEyeFill,
   BsFillEyeSlashFill,

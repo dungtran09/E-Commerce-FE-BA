@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { AiFillStar } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import { apiGetProduct } from "../../apis";
+import statusCode from "../../utils/statusCode";
 
 const UserRatings = ({ reviews }) => {
   const { id } = useParams();
@@ -11,7 +11,7 @@ const UserRatings = ({ reviews }) => {
 
   const fetchProduct = async () => {
     const res = await apiGetProduct(id);
-    if (res.status === "success") {
+    if (res.status === statusCode.SUCCESS) {
       setProduct(res?.data);
     }
   };

@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useCookies } from "react-cookie";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { userLogout } from "../../store/slices/userSlice";
 import icons from "../../utils/icons";
 import path from "../../utils/path";
 
@@ -27,15 +30,16 @@ const TopHeader = () => {
   const navigate = useNavigate();
   const [toggleMenu, setToggleMenu] = useState(false);
   const catMenu = useRef(null);
+  const dispatch = useDispatch();
+  const [cookies, removeCookie] = useCookies(["_jwt_user"]);
 
-  const tokenObj = JSON.parse(localStorage.getItem("persist:jwt"));
+  const userObj = JSON.parse(localStorage.getItem("userInfos"));
   useEffect(() => {
-    if (tokenObj?.isLoggedIn === "true" && tokenObj?.data && user === null) {
-      let user = JSON.parse(tokenObj?.data);
-      setUser(user);
+    if (userObj) {
+      setUser(userObj);
       setIsLogged(true);
     }
-  }, [isLogged, user]);
+  }, []);
 
   useEffect(() => {
     const closeOpenMenus = (e) => {
@@ -57,14 +61,9 @@ const TopHeader = () => {
   ));
 
   const onLogOutHandler = () => {
-    if (tokenObj?.isLoggedIn === "true" && isLogged && user) {
-      localStorage.removeItem("persist:jwt");
-      setIsLogged(false);
-      setUser(null);
-      navigate("/login");
-      window.location.reload(true);
-      window.location.reload(false);
-    }
+    removeCookie("_jwt_user");
+    dispatch(userLogout());
+    navigate("/login");
   };
 
   return (

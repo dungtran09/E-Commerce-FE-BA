@@ -8,6 +8,7 @@ import CountDownDealDaily from "./CountDownDealDaily";
 import { Link } from "react-router-dom";
 import path from "../../utils/path";
 import Button from "../Button/Button";
+import statusCode from "../../utils/statusCode";
 
 const DealDaily = () => {
   const { AiFillStar } = icons;
@@ -19,7 +20,7 @@ const DealDaily = () => {
       limit: 1,
     });
 
-    if (response.status === "success") {
+    if (response.status === statusCode.SUCCESS) {
       setDealDailyProduct(response.data[0]);
     }
   };

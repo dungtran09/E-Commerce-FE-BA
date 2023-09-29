@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeProduct } from "../../store/cartSlice";
+import { removeProduct } from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import path from "../../utils/path";

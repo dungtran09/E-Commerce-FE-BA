@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { apiGetProductsByStringSearchFields } from "../../apis/apiProducts";
 import icons from "../../utils/icons";
 import LoaderSm from "../Loader/LoaderSm";
+import path from "../../utils/path";
+import statusCode from "../../utils/statusCode";
 
 const SearchGlobal = () => {
   const { AiOutlineSearch } = icons;
@@ -15,16 +18,18 @@ const SearchGlobal = () => {
 
   const onChangeHandler = (e) => {
     setShowDropdown(true);
-    setShowLoader(true);
+    setShowLoader(false);
     setKeySearch(e.target.value.trim().toString());
+    setMsgStatus("Search for ");
   };
   const catDropDown = useRef(null);
   const fetchDataFromKeySearch = async (keySeach) => {
     const res = await apiGetProductsByStringSearchFields({ search: keySeach });
-    if (res?.status === "success" && res?.results !== 0) {
+    if (res?.status === statusCode.SUCCESS && res?.results !== 0) {
       setResults(res?.data);
       setShowLoader(false);
       setIsResults(true);
+      setMsgStatus("Results for ");
     } else {
       setShowLoader(false);
       setIsResults(false);
@@ -36,6 +41,8 @@ const SearchGlobal = () => {
     const delayDebounceFn = setTimeout(() => {
       if (keySeach?.length > 2) {
         fetchDataFromKeySearch(keySeach);
+        setShowLoader(true);
+        setMsgStatus("Search for ");
       }
     }, 2000);
 
@@ -63,19 +70,23 @@ const SearchGlobal = () => {
   }, [showDropdown, showLoader]);
 
   const resultEls = results?.map((result, index) => (
-    <div
-      class="flex gap-4 justify-start items-center border-b pb-3"
+    <Link
+      to={`${path.PRODUCTS}/${result?.categoryName}/${result?.slug}/${result?._id}`}
       key={index}
     >
-      <dt class="font-medium text-gray-900">
-        <img
-          src={result?.thumb}
-          className=" border w-[30px] object-cover p-1"
-          alt="img"
-        />
-      </dt>
-      <dd class="text-gray-700 sm:col-span-2">{result?.title}</dd>
-    </div>
+      <div className="flex gap-4 justify-start items-center border-b pb-3 cursor-pointer">
+        <dt className="font-medium text-gray-900">
+          <img
+            src={result?.thumb}
+            className=" border w-[30px] object-cover p-1"
+            alt="img"
+          />
+        </dt>
+        <dd className="text-gray-700 sm:col-span-2 hover:text-main">
+          {result?.title}
+        </dd>
+      </div>
+    </Link>
   ));
 
   return (
@@ -106,7 +117,13 @@ const SearchGlobal = () => {
             ref={catDropDown}
           >
             <div className="p-2 flex justify-start gap-2 py-2.5 pe-5 items-center">
-              <span>{showLoader && <LoaderSm />}</span>
+              <span>
+                {(showLoader && <LoaderSm />) || (
+                  <span className="text-[12px] font-semibold text-gray-500 line-clamp-2">
+                    {msgStatus}
+                  </span>
+                )}
+              </span>
               {keySeach ? (
                 <>
                   <span className="text-[12px] font-semibold text-gray-500 line-clamp-2">
@@ -118,13 +135,7 @@ const SearchGlobal = () => {
               )}
             </div>
             <div className="flex flex-col gap-3 p-2">
-              {isResults ? (
-                <>{resultEls}</>
-              ) : (
-                <span classname="text-[12px] text-gray-400 line-clamp-2">
-                  {msgStatus}
-                </span>
-              )}
+              {isResults ? <>{resultEls}</> : ""}
             </div>
           </div>
         )}

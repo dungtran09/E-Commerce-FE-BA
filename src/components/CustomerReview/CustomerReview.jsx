@@ -6,6 +6,8 @@ import UserRatings from "./UserRatings";
 import VoteBar from "./VoteBar";
 import { PortalToggle } from "../";
 import { apiGetProduct, apiRatings } from "../../apis";
+import { useCookies } from "react-cookie";
+import statusCode from "../../utils/statusCode";
 
 const CustomerReview = ({ product }) => {
   const { BiSolidImageAdd, GrAttachment, GiPositionMarker } = icons;
@@ -20,29 +22,31 @@ const CustomerReview = ({ product }) => {
   const [rating, setRating] = React.useState(0);
   const [selection, setSelection] = React.useState(0);
   const [updatedProduct, setUpdatedProduct] = useState(product);
+  const [cookies, removeCookie] = useCookies(["_jwt_user"]);
 
-  const tokenObj = JSON.parse(localStorage.getItem("persist:jwt"));
+  const userObj = JSON.parse(localStorage.getItem("userInfos"));
+
   useEffect(() => {
-    if (tokenObj?.isLoggedIn === "true" && tokenObj?.data) {
-      let user = JSON.parse(tokenObj?.data);
-      let newToken = tokenObj?.token.split('"');
-
-      setUser(user);
+    if (userObj && cookies) {
+      let token = cookies?._jwt_user;
+      setUser(userObj);
       setIsLogged(true);
-      setToken(newToken[1]);
+      setToken(token);
     }
   }, [token, review, rating, reviews, totalRatings]);
 
   const fetchRatings = async () => {
-    token = `authorization: bearer ${token}`;
-    const res = await apiRatings(review, product?._id, token);
-    if (res?.status === "success") {
-      const resProductUpdated = await apiGetProduct(product?._id);
-      if (resProductUpdated.status === "success") {
-        setUpdatedProduct(resProductUpdated?.data);
-        setReviews(updatedProduct?.ratings);
-        setTotalRatings(updatedProduct?.totalRatings);
-        setReview(null);
+    if (token) {
+      token = `authorization: bearer ${token}`;
+      const res = await apiRatings(review, product?._id, token);
+      if (res?.status === statusCode.SUCCESS) {
+        const resProductUpdated = await apiGetProduct(product?._id);
+        if (resProductUpdated.status === statusCode.SUCCESS) {
+          setUpdatedProduct(resProductUpdated?.data);
+          setReviews(updatedProduct?.ratings);
+          setTotalRatings(updatedProduct?.totalRatings);
+          setReview(null);
+        }
       }
     }
   };

@@ -1,25 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import persistReducer from "redux-persist/es/persistReducer";
-import persistStore from "redux-persist/es/persistStore";
-import storage from "redux-persist/lib/storage";
-import productCategoriesSlice from "./productCategoriesSlice";
-import productsSlice from "./productsSlice";
-import userSlice from "./userSlice";
+import productCategoriesSlice from "./slices/productCategoriesSlice";
+import productsSlice from "./slices/productsSlice";
+import userSlice from "./slices/userSlice";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import brands from "./brandsSlice";
-import cartSlice from "./cartSlice";
-import userByIdSlice from "./userByIdSlice";
-
-const commonConfig = {
-  key: "jwt",
-  storage,
-};
-
-const userConfig = {
-  ...commonConfig,
-  whitelist: ["isLoggedIn", "token", "data"],
-};
+import brands from "./slices/brandsSlice";
+import cartSlice from "./slices/cartSlice";
+import userByIdSlice from "./slices/userByIdSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,10 +14,8 @@ export const store = configureStore({
     products: productsSlice,
     brands: brands,
     carts: cartSlice,
-    user: persistReducer(userConfig, userSlice),
     userById: userByIdSlice,
+    user: userSlice,
   },
   middleware: [thunk, logger],
 });
-
-export const persistor = persistStore(store);
