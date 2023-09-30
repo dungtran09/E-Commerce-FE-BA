@@ -5,9 +5,7 @@ import * as apis from "../../apis";
 const initialState = {
   isLoggedIn: false,
   status: statusCode.EDLE,
-  userInfo: {
-    data: null,
-  },
+  userInfo: null,
 };
 
 export const userSlice = createSlice({
@@ -15,7 +13,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     userLogout: (state, action) => {
-      state.userInfo.data = null;
+      state.userInfo = null;
       state.isLoggedIn = false;
       state.status = statusCode.EDLE;
       localStorage.removeItem("userInfos");
@@ -24,17 +22,17 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(userLogin.pending, (state, action) => {
-        state.userInfo.data = action.payload;
+        state.userInfo = action.payload;
         state.status = statusCode.LOADING;
       })
       .addCase(userLogin.fulfilled, (state, action) => {
-        state.userInfo.data = action.payload;
+        state.userInfo = action.payload;
         state.isLoggedIn = true;
         state.status = statusCode.SUCCESS;
         localStorage.setItem("userInfos", JSON.stringify(action.payload));
       })
       .addCase(userLogin.rejected, (state, action) => {
-        state.userInfo.data = action.payload;
+        state.userInfo = action.payload;
         state.isLoggedIn = false;
         state.status = statusCode.ERROR;
         localStorage.removeItem("userInfos");

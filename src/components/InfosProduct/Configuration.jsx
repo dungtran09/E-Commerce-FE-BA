@@ -5,6 +5,7 @@ import { calcRating, formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import Button from "../Button/Button";
 import CounterQuantity from "./CounterQuantity";
+
 const Configuration = ({ product }) => {
   const dispatch = useDispatch();
 

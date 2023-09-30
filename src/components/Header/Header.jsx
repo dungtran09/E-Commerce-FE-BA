@@ -43,7 +43,7 @@ const Header = () => {
             <BsBagPlusFill color="red" size={22} />
             <span>
               <p className="h-6 w-6 rounded-full bg-blue-50 text-center  text-main text-[12px]/6 font-bold">
-                {cartProducts?.length || "0"}
+                {cartProducts?.listItems?.length || "0"}
               </p>
               item(s)
             </span>
@@ -52,7 +52,7 @@ const Header = () => {
             <div className="relative ml-4">
               <div className="top-[-18px] absolute left-4">
                 <p className="flex h-2 w-2 items-center justify-center rounded-full hover:opacity-70 bg-blue-50 p-3 text-xs text-main font-bold">
-                  {cartProducts?.length || "0"}
+                  {cartProducts?.listItems?.length || "0"}
                 </p>
               </div>
               <BsFillCartCheckFill className="text-main mt-4 h-6 w-6 hover:opacity-70" />

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { removeProduct } from "../../store/slices/cartSlice";
+import { calcTotal, removeItem } from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import path from "../../utils/path";
@@ -10,13 +10,18 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
   const { GrClose } = icons;
 
   const cartProducts = useSelector((state) => state.carts);
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calcTotal());
+  }, [cartProducts]);
+
   const onRemoveFromCart = (id) => {
-    dispatch(removeProduct(id));
+    dispatch(removeItem(id));
   };
 
-  const cartProductEls = cartProducts?.map((product) => (
-    <li className="flex py-6" key={product?._id}>
+  const cartProductEls = cartProducts?.listItems?.map((product, index) => (
+    <li className="flex py-6" key={index}>
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border p-2 border-gray-200">
         <img
           src={product?.thumb}
@@ -27,7 +32,7 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
 
       <div className="ml-4 flex flex-1 flex-col">
         <div>
-          <div className="flex justify-between text-base font-medium text-gray-900">
+          <div className="flex justify-between text-sm font-medium text-gray-900">
             <h3 className="cursor-pointer hover:opacity-70">
               <Link
                 to={`/${path.PRODUCTS}/${product?.categoryName}/${product?.slug}/${product?._id}`}
@@ -41,7 +46,7 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
           <p className="mt-1 text-sm text-gray-500">Salmon</p>
         </div>
         <div className="flex flex-1 items-end justify-between text-sm">
-          <p className="text-gray-500">Qty 1</p>
+          <p className="text-gray-500">Qty {product?.quantity}</p>
 
           <div className="flex">
             <button
@@ -67,7 +72,7 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
           <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
             <div className="flex items-start justify-between">
               <h2 className="text-sm font-medium uppercase text-gray-900">
-                Shopping cart ({cartProducts?.length})
+                Shopping cart ({cartProducts?.listItems?.length})
               </h2>
               <div className="ml-3 flex h-7 items-center">
                 <button
@@ -90,8 +95,10 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
 
           <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
             <div className="flex justify-between text-base font-medium text-gray-900">
-              <p>Subtotal</p>
-              <p>{cartProductEls?.total || 0} VND</p>
+              <p className="text-[14px] uppercase">Subtotal</p>
+              <p className="text-main font-semibold text-sm">
+                {formatNumber(cartProducts?.totalAmount) || 0} VND
+              </p>
             </div>
             <p className="mt-0.5 text-sm text-gray-500">
               Shipping and taxes calculated at checkout.

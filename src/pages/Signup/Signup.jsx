@@ -9,6 +9,7 @@ import {
   isPasswordSecure,
 } from "../../utils/helper";
 import icons from "../../utils/icons";
+import path from "../../utils/path";
 import statusCode from "../../utils/statusCode";
 
 const Signup = () => {
@@ -180,7 +181,7 @@ const Signup = () => {
     }
   };
   const navigateToLogin = () => {
-    navigate("/Login", { replace: true });
+    navigate(`/${path.LOGIN}`, { replace: true });
   };
 
   return (

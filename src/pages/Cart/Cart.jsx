@@ -1,22 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { Button } from "../../components";
-import { removeProduct } from "../../store/slices/cartSlice";
+import {
+  calcTotal,
+  clearCart,
+  decreaseCart,
+  increaseCart,
+  removeItem,
+} from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
+import path from "../../utils/path";
 
 const Cart = () => {
-  const { BsArrowLeft } = icons;
+  const { BsArrowLeft, BiMinus, BsPlusLg } = icons;
+
   const dispatch = useDispatch();
+
   const cartProducts = useSelector((state) => state.carts);
-
-  const onRemoveFromCarts = (id) => {
-    dispatch(removeProduct(id));
-  };
-
   console.log(cartProducts);
 
-  const cartProductEls = cartProducts?.map((product) => (
+  useEffect(() => {
+    dispatch(calcTotal());
+  }, [cartProducts]);
+
+  const onHandlerRemoveFromCart = (id) => {
+    dispatch(removeItem(id));
+  };
+
+  const onHandlerDecreaseItem = (id) => {
+    dispatch(decreaseCart(id));
+  };
+
+  const onHandlerIncreaseItem = (id) => {
+    dispatch(increaseCart(id));
+  };
+
+  const onHandlerClearCart = () => {
+    dispatch(clearCart());
+  };
+
+  const cartProductEls = cartProducts?.listItems?.map((product) => (
     <div
       className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5 "
       key={product?._id}
@@ -30,26 +55,36 @@ const Cart = () => {
           <span className="text-gray-700 text-xs">{product?.title}</span>
           <span
             className="font-semibold hover:opacity-70 text-main text-xs cursor-pointer"
-            onClick={() => onRemoveFromCarts(product?._id)}
+            onClick={() => onHandlerRemoveFromCart(product?._id)}
           >
             Remove
           </span>
         </div>
       </div>
       <div className="flex justify-center items-center w-1/5">
-        <div className="fill-current text-gray-600 w-3 m-2 cursor-pointer">
-          -
+        <div
+          onClick={() => onHandlerDecreaseItem(product?._id)}
+          className="fill-current text-gray-600 w-3 m-2 cursor-pointer"
+        >
+          <BiMinus />
         </div>
-        <input className="mx-2 border text-center w-8" value={1} type="text" />
-        <div className="fill-current text-gray-600 w-3 m-2 cursor-pointer">
-          +
+        <input
+          className="mx-2 border text-center w-16"
+          defaultValue={product?.quantity}
+          type="text"
+        />
+        <div
+          onClick={() => onHandlerIncreaseItem(product?._id)}
+          className="fill-current text-gray-600 w-3 m-2 cursor-pointer"
+        >
+          <BsPlusLg />
         </div>
       </div>
       <span className="text-center w-1/5 font-semibold text-sm">
         {formatNumber(product?.price)} VND
       </span>
       <span className="text-center w-1/5 font-semibold text-sm">
-        {formatNumber(product?.price)} VND
+        {formatNumber(product?.price * product?.quantity)} VND
       </span>
     </div>
   ));
@@ -61,7 +96,7 @@ const Cart = () => {
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-xl">Shopping Cart</h1>
             <h2 className="font-semibold text-xl">
-              ({cartProducts?.length}) Items
+              ({cartProducts?.listItems?.length}) Items
             </h2>
           </div>
           <div className="flex mt-10 mb-5">
@@ -79,22 +114,31 @@ const Cart = () => {
             </h3>
           </div>
           {cartProductEls}
-          <a
-            href="#"
+          {cartProducts?.listItems?.length !== 0 && (
+            <Button
+              name="Clear All"
+              style="bg-gray-300 hover:opacity-70 px-5 py-2 mt-4 round-sm text-sm text-gray-700 uppercase"
+              onClickHandler={onHandlerClearCart}
+            />
+          )}
+          <Link
+            to={`/${path.HOME}`}
             className="flex justify-start items-center gap-2 font-semibold text-main hover:opacity-70 text-sm mt-10"
           >
             <BsArrowLeft size={20} />
             <span>Continue Shopping</span>
-          </a>
+          </Link>
         </div>
 
         <div id="summary" className="w-1/4 px-8 py-10">
           <h1 className="font-semibold text-xl border-b pb-8">Order Summary</h1>
           <div className="flex justify-between mt-10 mb-5">
             <span className="font-semibold text-sm uppercase">
-              Items ({cartProducts?.length | 0})
+              Items ({cartProducts?.listItems?.length | 0})
             </span>
-            <span className="font-semibold text-sm">590$</span>
+            <span className="font-semibold text-sm">
+              {formatNumber(cartProducts?.totalAmount)} VND
+            </span>
           </div>
           <div>
             <label className="font-medium inline-block mb-3 text-sm uppercase">
@@ -118,13 +162,16 @@ const Cart = () => {
               className="p-2 text-sm w-full"
             />
           </div>
-          <button className="bg-gray-500 hover:opacity-70 px-5 py-2 text-sm text-white uppercase">
-            Apply
-          </button>
+          <Button
+            name="Apply"
+            style="bg-gray-500 hover:opacity-70 px-5 py-2 text-sm text-white uppercase"
+          />
           <div className="border-t mt-8">
-            <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+            <div className="flex justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
-              <span>$600</span>
+              <span className="text-main font-semibold">
+                {formatNumber(cartProducts?.totalAmount)} VND
+              </span>
             </div>
             <Button name="Check Out" />
           </div>

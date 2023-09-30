@@ -63,7 +63,7 @@ const TopHeader = () => {
   const onLogOutHandler = () => {
     removeCookie("_jwt_user");
     dispatch(userLogout());
-    navigate("/login");
+    navigate(`/${path.LOGIN}`);
   };
 
   return (

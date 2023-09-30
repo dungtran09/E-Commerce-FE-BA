@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getProductCategories } from "./store/slices/productCategoriesSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   Public,
@@ -17,13 +17,22 @@ import {
   User,
   Search,
   Signup,
+  Admin,
+  Analytics,
+  Dashboard,
+  Error,
 } from "./pages";
 
 import path from "./utils/path";
+import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
+import { useCookies } from "react-cookie";
 
 function App() {
-  const dispatch = useDispatch();
+  const [cookies, removeCookie] = useCookies(["_jwt_user"]);
 
+  const userObj = JSON.parse(localStorage.getItem("userInfos"));
+
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductCategories());
   }, [dispatch]);
@@ -43,8 +52,24 @@ function App() {
           <Route path={path.USER} element={<User />} />
           <Route path={path.SEARCH} element={<Search />} />
         </Route>
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={
+                userObj &&
+                userObj?.role === "Admin" &&
+                cookies._jwt_user !== "undefined"
+              }
+            />
+          }
+        >
+          <Route path={path.ADMIN} element={<Admin />} />
+          <Route path={path.ANALYTICS} element={<Analytics />} />
+          <Route path={path.DASHBOARD} element={<Dashboard />} />
+        </Route>
         <Route path={path.LOGIN} element={<Login />} />
         <Route path={path.SIGNUP} element={<Signup />} />
+        <Route path={path.ALL} element={<Error />} />
       </Routes>
     </div>
   );

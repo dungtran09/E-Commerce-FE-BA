@@ -3,6 +3,7 @@ const statusCode = {
   EDLE: "idle",
   ERROR: "error",
   SUCCESS: "success",
+  FAIL: "fail",
 };
 
 export default statusCode;

@@ -14,7 +14,6 @@ const CustomerReview = ({ product }) => {
 
   const [user, setUser] = useState(null);
   const [isLogged, setIsLogged] = useState(false);
-  let [token, setToken] = useState(null);
 
   const [reviews, setReviews] = useState([]);
   const [totalRatings, setTotalRatings] = useState(0);
@@ -22,37 +21,39 @@ const CustomerReview = ({ product }) => {
   const [rating, setRating] = React.useState(0);
   const [selection, setSelection] = React.useState(0);
   const [updatedProduct, setUpdatedProduct] = useState(product);
+  const [msgError, setMsgError] = useState("");
   const [cookies, removeCookie] = useCookies(["_jwt_user"]);
-
   const userObj = JSON.parse(localStorage.getItem("userInfos"));
 
   useEffect(() => {
-    if (userObj && cookies) {
-      let token = cookies?._jwt_user;
+    if (userObj) {
       setUser(userObj);
       setIsLogged(true);
-      setToken(token);
     }
-  }, [token, review, rating, reviews, totalRatings]);
+  }, [rating, reviews, totalRatings]);
 
   const fetchRatings = async () => {
-    if (token) {
-      token = `authorization: bearer ${token}`;
-      const res = await apiRatings(review, product?._id, token);
-      if (res?.status === statusCode.SUCCESS) {
-        const resProductUpdated = await apiGetProduct(product?._id);
-        if (resProductUpdated.status === statusCode.SUCCESS) {
-          setUpdatedProduct(resProductUpdated?.data);
-          setReviews(updatedProduct?.ratings);
-          setTotalRatings(updatedProduct?.totalRatings);
-          setReview(null);
-        }
+    const res = await apiRatings(review, product?._id);
+    if (res?.status === statusCode.SUCCESS) {
+      const resProductUpdated = await apiGetProduct(product?._id);
+      if (resProductUpdated.status === statusCode.SUCCESS) {
+        setUpdatedProduct(resProductUpdated?.data);
+        setReviews(updatedProduct?.ratings);
+        setTotalRatings(updatedProduct?.totalRatings);
+        setReview(null);
       }
+    }
+
+    if (res?.status === statusCode.FAIL) {
+      setMsgError(res?.message);
+      setIsError(true);
     }
   };
 
   useEffect(() => {
-    fetchRatings();
+    if (cookies._jwt_user !== "undefined" && userObj) {
+      fetchRatings();
+    }
   }, []);
 
   const [isError, setIsError] = useState(false);
@@ -80,11 +81,10 @@ const CustomerReview = ({ product }) => {
   };
 
   const handlerOnSubmit = async () => {
-    if (!review?.text || !review?.star || !isLogged) {
+    if (!review?.text || !review?.star) {
       setIsError(true);
-      return;
-    }
-    if (review.text && review.star && product?._id && isLogged && token) {
+      setMsgError("Please ratings and write comment!");
+    } else {
       fetchRatings();
     }
   };
@@ -132,7 +132,7 @@ const CustomerReview = ({ product }) => {
                   <PortalToggle
                     showStatus={showError}
                     hideStatus={hideError}
-                    message="Please write comment and ratings."
+                    message={msgError}
                     status="Error"
                   />
                 )}

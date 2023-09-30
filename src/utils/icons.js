@@ -14,6 +14,7 @@ import {
   BsFillEyeSlashFill,
   BsArrowDown,
   BsArrowUp,
+  BsPlusLg,
 } from "react-icons/bs";
 import { MdEmail, MdLocalShipping, MdKeyboardArrowDown } from "react-icons/md";
 import {
@@ -26,6 +27,7 @@ import {
 } from "react-icons/fa";
 import { AiFillEye, AiOutlineMenu, AiFillGift } from "react-icons/ai";
 import { GiVibratingSmartphone } from "react-icons/gi";
+import { BiMinus } from "react-icons/bi";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
 import { FiCamera, FiPrinter, FiHeadphones } from "react-icons/fi";
 import {
@@ -47,8 +49,11 @@ import { SiSpringsecurity } from "react-icons/si";
 import { SiConvertio } from "react-icons/si";
 import { GrAttachment, GrClose } from "react-icons/gr";
 import { BiSolidImageAdd } from "react-icons/bi";
-
+import { BiSolidBellRing } from "react-icons/bi";
 const icons = {
+  BiMinus,
+  BsPlusLg,
+  BiSolidBellRing,
   BsArrowDown,
   BsArrowUp,
   MdKeyboardArrowDown,

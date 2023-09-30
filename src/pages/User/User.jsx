@@ -18,7 +18,7 @@ const User = () => {
     if (userObj) {
       setUser(userObj);
     }
-  }, [userObj]);
+  }, []);
 
   return (
     <div className="w-main grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">

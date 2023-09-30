@@ -102,7 +102,7 @@ const Login = () => {
   };
 
   const navigateToSignup = () => {
-    navigate("/Signup", { replace: true });
+    navigate(`/${path.SIGNUP}`, { replace: true });
   };
 
   return (
@@ -140,8 +140,8 @@ const Login = () => {
             </div>
             {loginFail && (
               <PortalToggle
-                status={userInfo?.data?.status || "Error"}
-                message={userInfo?.data?.message}
+                status={userInfo?.status || statusCode.ERROR}
+                message={userInfo?.message}
                 showStatus={showStatus}
                 hideStatus={hideStatus}
               />
