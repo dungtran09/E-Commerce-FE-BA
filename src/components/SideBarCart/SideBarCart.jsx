@@ -14,7 +14,7 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(calcTotal());
-  }, [cartProducts]);
+  }, [cartProducts, dispatch]);
 
   const onRemoveFromCart = (id) => {
     dispatch(removeItem(id));

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "../../components";
 import {
+  addToCart,
   calcTotal,
   clearCart,
   decreaseCart,
@@ -15,15 +16,13 @@ import path from "../../utils/path";
 
 const Cart = () => {
   const { BsArrowLeft, BiMinus, BsPlusLg } = icons;
-
   const dispatch = useDispatch();
 
   const cartProducts = useSelector((state) => state.carts);
-  console.log(cartProducts);
 
   useEffect(() => {
     dispatch(calcTotal());
-  }, [cartProducts]);
+  }, [cartProducts, dispatch]);
 
   const onHandlerRemoveFromCart = (id) => {
     dispatch(removeItem(id));
@@ -33,8 +32,8 @@ const Cart = () => {
     dispatch(decreaseCart(id));
   };
 
-  const onHandlerIncreaseItem = (id) => {
-    dispatch(increaseCart(id));
+  const onHandlerIncreaseItem = (product) => {
+    dispatch(addToCart(product));
   };
 
   const onHandlerClearCart = () => {
@@ -70,11 +69,11 @@ const Cart = () => {
         </div>
         <input
           className="mx-2 border text-center w-16"
-          defaultValue={product?.quantity}
+          value={product?.quantity}
           type="text"
         />
         <div
-          onClick={() => onHandlerIncreaseItem(product?._id)}
+          onClick={() => onHandlerIncreaseItem(product)}
           className="fill-current text-gray-600 w-3 m-2 cursor-pointer"
         >
           <BsPlusLg />
