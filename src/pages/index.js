@@ -11,15 +11,9 @@ import Cart from "./Cart/Cart";
 import User from "./User/User";
 import Search from "./Search/Search";
 import Signup from "./Signup/Signup";
-import Admin from "./Admin/Admin";
-import Dashboard from "./Admin/Dashboard/Dashboard";
-import Analytics from "./Admin/Analytics/Analytics";
 import Error from "./Error/Error";
 export {
   Error,
-  Admin,
-  Dashboard,
-  Analytics,
   Signup,
   Search,
   User,

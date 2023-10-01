@@ -12,8 +12,7 @@ const path = {
   SEARCH: "search",
   FAQS: "faqs",
   ADMIN: "admin",
-  DASHBOARD: "dashboard",
-  ANALYTICS: "analytics",
+  ECOMMERCE: "ecommerce",
   DETAILS_PRODUCT: "products/:category/:title/:id",
   ALL: "*",
 };
