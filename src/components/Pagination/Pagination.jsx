@@ -37,7 +37,7 @@ const Pagination = ({ totalPages, currentPage, setCurrentPage }) => {
           )
         }
         containerClassName="flex justify-center items-center mt-8 mb-4"
-        pageClassName="block border border-solid border hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded-md mr-4 cursor-poiter"
+        pageClassName="block border border-solid border p-2 hover:bg-gray-200 w-10 h-10 flex items-center justify-center rounded-md mr-4 cursor-poiter"
         activeClassName="bg-main text-white"
       />
     </>

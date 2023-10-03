@@ -4,32 +4,125 @@ import { SiShopware } from "react-icons/si";
 import { MdOutlineCancel } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import { links } from "../../../assets/Home-banner/dummy";
+import {
+  AiOutlineShoppingCart,
+  AiOutlineAreaChart,
+  AiOutlineBarChart,
+  AiOutlineStock,
+  AiOutlineTable,
+} from "react-icons/ai";
+import { FiShoppingBag, FiPieChart, FiSettings } from "react-icons/fi";
+import { BsFillChatDotsFill } from "react-icons/bs";
+import { IoMdContacts } from "react-icons/io";
+import { FaBlog } from "react-icons/fa";
+import { RiContactsLine, RiStockLine } from "react-icons/ri";
+import { GiLouvrePyramid } from "react-icons/gi";
 import { useStateContext } from "../../../contexts/ContextProvider";
 
 const SideBar = () => {
-  const { activeMenu, setActiveMenu, screenSize, setScreenSize } =
+  const { currentColor, activeMenu, setActiveMenu, screenSize } =
     useStateContext();
 
-  const handlerCloseSideBar = () => {
-    if (activeMenu && screenSize <= 900) {
+  const handleCloseSideBar = () => {
+    if (activeMenu !== undefined && screenSize <= 900) {
       setActiveMenu(false);
     }
   };
 
+  const links = [
+    {
+      title: "Dashboard",
+      links: [
+        {
+          name: "ecommerce",
+          icon: <FiShoppingBag />,
+        },
+      ],
+    },
+
+    {
+      title: "Pages",
+      links: [
+        {
+          name: "orders",
+          icon: <AiOutlineShoppingCart />,
+        },
+        {
+          name: "employees",
+          icon: <IoMdContacts />,
+        },
+        {
+          name: "customers",
+          icon: <RiContactsLine />,
+        },
+        {
+          name: "settings",
+          icon: <FiSettings />,
+        },
+        {
+          name: "tables",
+          icon: <AiOutlineTable />,
+        },
+        {
+          name: "chat",
+          icon: <BsFillChatDotsFill />,
+        },
+        {
+          name: "blogs-control",
+          icon: <FaBlog />,
+        },
+      ],
+    },
+    {
+      title: "Charts",
+      links: [
+        {
+          name: "line",
+          icon: <AiOutlineStock />,
+        },
+        {
+          name: "area",
+          icon: <AiOutlineAreaChart />,
+        },
+
+        {
+          name: "bar",
+          icon: <AiOutlineBarChart />,
+        },
+        {
+          name: "pie",
+          icon: <FiPieChart />,
+        },
+        {
+          name: "financial",
+          icon: <RiStockLine />,
+        },
+        {
+          name: "pyramid",
+          icon: <GiLouvrePyramid />,
+        },
+        {
+          name: "stacked",
+          icon: <AiOutlineBarChart />,
+        },
+      ],
+    },
+  ];
+
   const activeLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-white text-md m-2";
-  const nomalLink =
+    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg bg-gray-500 text-white text-md m-2";
+  const normalLink =
     "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
+
   const linksEls = links.map((item, index) => (
     <div className="" key={index}>
       <p className="text-gray-400 mt-4 uppercase">{item.title}</p>
       {item.links.map((link) => (
         <NavLink
-          to={`/${link.name}`}
+          to={`/admin/${link.name}`}
           key={link.name}
-          onClick={handlerCloseSideBar}
-          className={({ isActive }) => (isActive ? activeLink : nomalLink)}
+          onClick={handleCloseSideBar}
+          className={({ isActive }) => (isActive ? activeLink : normalLink)}
         >
           {link.icon}
           <span className="capitalize">{link.name}</span>
@@ -44,23 +137,23 @@ const SideBar = () => {
           <div className="flex justify-between items-center">
             <Link
               to="/"
-              onClick={handlerCloseSideBar}
+              onClick={handleCloseSideBar}
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
-              <SiShopware /> <span>Shoppy</span>
+              <SiShopware /> <span>E-Ecommerce</span>
             </Link>
             <TooltipComponent content="Menu" position="BottomCenter">
               <button
-                onClick={() => {
-                  setActiveMenu((prevState) => !prevState);
-                }}
-                className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block"
+                type="button"
+                onClick={() => setActiveMenu(!activeMenu)}
+                style={{ color: currentColor }}
+                className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block md:hidden"
               >
                 <MdOutlineCancel />
               </button>
             </TooltipComponent>
           </div>
-          <div>{linksEls}</div>
+          <div className="mt-10 ">{linksEls}</div>
         </>
       )}
     </div>

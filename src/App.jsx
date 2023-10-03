@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { getProductCategories } from "./store/slices/productCategoriesSlice";
-import { useDispatch } from "react-redux";
 
 import {
   Public,
@@ -23,17 +21,30 @@ import {
 import path from "./utils/path";
 import ProtectedRoute from "./pages/ProtectedRoute/ProtectedRoute";
 import { useCookies } from "react-cookie";
-import { Ecommerce, Admin } from "./pages/Admin";
+import {
+  Ecommerce,
+  Admin,
+  Orders,
+  Employees,
+  Customers,
+  Settings,
+  Tables,
+  Area,
+  Bar,
+  Financial,
+  Pyramid,
+  Pie,
+  Line,
+  Calendar,
+  Chat,
+  Stacked,
+} from "./pages/Admin";
+import BlogsControl from "./pages/Admin/BlogsControl/BlogsControl";
 
 function App() {
-  const [cookies, removeCookie] = useCookies(["_jwt_user"]);
+  const [cookies] = useCookies(["_jwt_user"]);
 
   const userObj = JSON.parse(localStorage.getItem("userInfos"));
-
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getProductCategories());
-  }, [dispatch]);
 
   return (
     <div className="min-h-screen font-main">
@@ -48,7 +59,6 @@ function App() {
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
           <Route path={path.USER} element={<User />} />
-          <Route path={path.SEARCH} element={<Search />} />
           <Route path={path.ALL} element={<Error />} />
         </Route>
         <Route
@@ -64,6 +74,21 @@ function App() {
         >
           <Route path={path.ADMIN} element={<Admin />}>
             <Route path={path.ECOMMERCE} element={<Ecommerce />} />
+            <Route path={path.EMPLOYEES} element={<Employees />} />
+            <Route path={path.ORDERS} element={<Orders />} />
+            <Route path={path.CUSTOMERS} element={<Customers />} />
+            <Route path={path.CALENDAR} element={<Calendar />} />
+            <Route path={path.SETTINGS} element={<Settings />} />
+            <Route path={path.TABLES} element={<Tables />} />
+            <Route path={path.BLOGS_ADMIN} element={<BlogsControl />} />
+            <Route path={path.FINANCIAL} element={<Financial />} />
+            <Route path={path.LINE} element={<Line />} />
+            <Route path={path.AREA} element={<Area />} />
+            <Route path={path.BAR} element={<Bar />} />
+            <Route path={path.PIE} element={<Pie />} />
+            <Route path={path.PYRAMID} element={<Pyramid />} />
+            <Route path={path.STACKED} element={<Stacked />} />
+            <Route path={path.CHAT} element={<Chat />} />
           </Route>
         </Route>
         <Route path={path.LOGIN} element={<Login />} />

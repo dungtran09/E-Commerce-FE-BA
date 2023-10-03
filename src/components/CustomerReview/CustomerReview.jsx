@@ -51,7 +51,7 @@ const CustomerReview = ({ product }) => {
   };
 
   useEffect(() => {
-    if (cookies._jwt_user !== "undefined" && userObj) {
+    if (cookies._jwt_user && userObj) {
       fetchRatings();
     }
   }, []);

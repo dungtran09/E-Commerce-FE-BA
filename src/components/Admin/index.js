@@ -1,36 +1,54 @@
 import Button from "../Button/Button";
 import Calendar from "./Calendar/Calendar";
-import Cart from "./Cart/Cart";
+import CardBarChart from "./Cards/CardBarChart";
+import CardLineChart from "./Cards/CardLineChart";
+import CardPageVisits from "./Cards/CardPageVisits";
+import CardProfile from "./Cards/CardProfile";
+import CardSettings from "./Cards/CardSettings";
+import CardSocialTraffic from "./Cards/CardSocialTraffic";
+import CardStats from "./Cards/CardStats";
+import CardTable from "./Cards/CardTable";
+import LineChart from "./Charts/LineChart";
+import Doughnut from "./Charts/Pie";
+import SparkLine from "./Charts/SparkLine";
+import Stacked from "./Charts/Stacked";
 import ChartsHeader from "./ChartsHeader/ChartsHeader";
 import Chat from "./Chat/Chat";
 import Earnings from "./Ecommerce/Earnings";
-import Editor from "./Editor/Editor";
+import EarningsData from "./Ecommerce/EarningsData";
+import RevenueUpdates from "./Ecommerce/RevenueUpdates";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
-import Kaban from "./Kaban/Kaban";
-import LineChart from "./LineChart/LineChart";
 import NavBar from "./NavBar/NavBar";
 import NavButton from "./NavBar/NavButton";
 import Notification from "./Notification/Notification";
 import Sidebar from "./SideBar/Sidebar";
-import SparkLine from "./SparkLine/SparkLine";
 import ThemeSetting from "./ThemeSetting/ThemeSetting";
 import UserProfile from "./UserProfile/UserProfile";
 export {
-  Earnings,
+  CardTable,
+  CardSocialTraffic,
+  CardBarChart,
+  CardLineChart,
+  CardPageVisits,
+  CardStats,
+  CardSettings,
+  CardProfile,
+  EarningsData,
   LineChart,
-  Button,
+  Doughnut,
   SparkLine,
+  Stacked,
+  RevenueUpdates,
+  Earnings,
+  Button,
   Notification,
   NavButton,
-  Cart,
   ChartsHeader,
   Chat,
   NavBar,
   ThemeSetting,
   UserProfile,
-  Kaban,
-  Editor,
   Calendar,
   Sidebar,
   Header,

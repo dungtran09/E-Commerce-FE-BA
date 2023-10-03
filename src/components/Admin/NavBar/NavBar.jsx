@@ -1,24 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { FiShoppingCart } from "react-icons/fi";
 import { BsChatLeft } from "react-icons/bs";
 import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
-import avatar from "../../../assets/Home-banner/avatar.jpg";
-import { Cart, Chat, NavButton, Notification, UserProfile } from "../";
+import { Chat, NavButton, Notification, UserProfile } from "../";
 import { useStateContext } from "../../../contexts/ContextProvider";
+import { useRef } from "react";
 
 const NavBar = () => {
   const {
+    currentColor,
     activeMenu,
     setActiveMenu,
-    isClicked,
-    setIsClicked,
     handlerClick,
-    screenSize,
+    isClicked,
     setScreenSize,
+    screenSize,
   } = useStateContext();
 
   useEffect(() => {
@@ -37,55 +36,72 @@ const NavBar = () => {
     }
   }, [screenSize]);
 
+  const [toggleMenu, setToggleMenu] = useState(false);
+  const catMenu = useRef(null);
+
+  useEffect(() => {
+    const closeOpenMenus = (e) => {
+      if (
+        catMenu.current &&
+        toggleMenu &&
+        !catMenu.current.contains(e.target)
+      ) {
+        setToggleMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", closeOpenMenus);
+  }, [toggleMenu]);
+
+  const handleActiveMenu = () => {
+    setActiveMenu(!activeMenu);
+  };
+
   return (
-    <nav className="flex justify-between p-2 md:mx-6 relative">
+    <nav className="flex justify-between p-2 md:ml-6 md:mr-6 relative">
       <NavButton
         title="Menu"
-        customFunc={() => setActiveMenu((prevState) => !prevState)}
-        color="blue"
+        customFunc={handleActiveMenu}
+        color={currentColor}
         icon={<AiOutlineMenu />}
       />
-
-      <div className="flex">
+      <div ref={catMenu} className="flex">
         <NavButton
-          title="Cart"
-          customFunc={() => handlerClick("cart")}
-          color="blue"
-          icon={<FiShoppingCart />}
-        />
-        <NavButton
-          dotColor="#03C9D7"
           title="Chat"
+          dotColor="#03C9D7"
           customFunc={() => handlerClick("chat")}
-          color="blue"
+          color={currentColor}
           icon={<BsChatLeft />}
         />
         <NavButton
-          dotColor="#03C9D7"
           title="Notification"
+          dotColor="rgb(254, 201, 15)"
           customFunc={() => handlerClick("notification")}
-          color="blue"
+          color={currentColor}
           icon={<RiNotification3Line />}
         />
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray round-lg"
+            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handlerClick("userProfile")}
           >
-            <img src={avatar} className="rounded-full w-8 h-8" />
+            <img
+              className="rounded-full w-8 h-8"
+              src="https://semantic-ui.com/images/avatar2/large/matthew.png"
+              alt="user-profile"
+            />
             <p>
-              <span className="text-gray-400 text-14">Hi, </span>
-              <span className="text-gray-400 text-14 font-bold ml-1 text-14">
-                Michal
+              <span className="text-gray-400 text-14">Hi,</span>
+              <span className="text-gray-400 font-bold ml-1 text-14">
+                Dung Tran
               </span>
             </p>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </TooltipComponent>
-        {isClicked.cart && <Cart />}
-        {isClicked.chat && <Chat />}
-        {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
+
+        {isClicked?.chat && <Chat />}
+        {isClicked?.notification && <Notification />}
+        {isClicked?.userProfile && <UserProfile />}
       </div>
     </nav>
   );

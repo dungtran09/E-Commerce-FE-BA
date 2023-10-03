@@ -1,20 +1,19 @@
 import React, { createContext, useContext, useState } from "react";
 const StateContext = createContext();
 
-const initalState = {
+const initialState = {
   chat: false,
-  cart: false,
-  useProfile: false,
+  userProfile: false,
   notification: false,
 };
 
 export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
-  const [isClicked, setIsClicked] = useState(initalState);
-  const handlerClick = (clicked) => {
-    setIsClicked({ ...initalState, [clicked]: true });
-  };
+  const [isClicked, setIsClicked] = useState(initialState);
+  const [currentColor, setCurrentColor] = useState("#888888");
 
+  const handlerClick = (clicked) =>
+    setIsClicked({ ...initialState, [clicked]: true });
   const [screenSize, setScreenSize] = useState(undefined);
 
   return (
@@ -27,6 +26,8 @@ export const ContextProvider = ({ children }) => {
         handlerClick,
         screenSize,
         setScreenSize,
+        currentColor,
+        setCurrentColor,
       }}
     >
       {children}

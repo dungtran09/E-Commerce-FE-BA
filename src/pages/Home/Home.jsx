@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import {
   Sidebar,
   Banner,
@@ -10,8 +11,14 @@ import {
   HotCollections,
   BlogPosts,
 } from "../../components";
+import { getProductCategories } from "../../store/slices/productCategoriesSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProductCategories());
+  }, [dispatch]);
+
   return (
     <>
       <section className="w-main flex justify-center items-start m-auto">
