@@ -13,7 +13,7 @@ export const createSlug = (str) => {
 
 export const formatNumber = (number) => {
   if (!number) return;
-  return Number(number.toFixed(1)).toLocaleString();
+  return Number(number.toFixed(1));
 };
 
 export const calcRating = (number) => {

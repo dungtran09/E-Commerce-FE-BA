@@ -43,7 +43,7 @@ const Admin = () => {
         <section className="md:px-10 mx-auto w-full">
           <Outlet />
         </section>
-        <footer className="relative bg-blueGray-200 pt-8 pb-6">
+        <footer className="relative pt-8 pb-6">
           <Footer />
         </footer>
       </div>

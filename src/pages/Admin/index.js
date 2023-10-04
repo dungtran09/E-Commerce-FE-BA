@@ -13,14 +13,12 @@ import Ecommerce from "./Ecommerce/Ecommerce";
 import Employees from "./Employees/Employees";
 import Orders from "./Orders/Orders";
 import Settings from "./Settings/Settings";
-import Tables from "./Tables/Tables";
 import { Calendar } from "../../components/Admin";
 export {
   Calendar,
   Line,
   Stacked,
   BlogsControl,
-  Tables,
   Settings,
   Chat,
   Admin,

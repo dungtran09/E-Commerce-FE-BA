@@ -11,6 +11,7 @@ export const ContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [currentColor, setCurrentColor] = useState("#888888");
+  const [shipping, setShipping] = useState(10000);
 
   const handlerClick = (clicked) =>
     setIsClicked({ ...initialState, [clicked]: true });
@@ -28,6 +29,8 @@ export const ContextProvider = ({ children }) => {
         setScreenSize,
         currentColor,
         setCurrentColor,
+        shipping,
+        setShipping,
       }}
     >
       {children}

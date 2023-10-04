@@ -17,5 +17,5 @@ export const store = configureStore({
     userById: userByIdSlice,
     user: userSlice,
   },
-  middleware: [thunk],
+  middleware: [thunk, logger],
 });

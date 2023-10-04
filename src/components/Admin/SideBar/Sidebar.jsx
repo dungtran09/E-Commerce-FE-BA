@@ -9,7 +9,6 @@ import {
   AiOutlineAreaChart,
   AiOutlineBarChart,
   AiOutlineStock,
-  AiOutlineTable,
 } from "react-icons/ai";
 import { FiShoppingBag, FiPieChart, FiSettings } from "react-icons/fi";
 import { BsFillChatDotsFill } from "react-icons/bs";
@@ -58,10 +57,6 @@ const SideBar = () => {
         {
           name: "settings",
           icon: <FiSettings />,
-        },
-        {
-          name: "tables",
-          icon: <AiOutlineTable />,
         },
         {
           name: "chat",

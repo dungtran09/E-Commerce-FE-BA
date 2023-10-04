@@ -1,16 +1,40 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/slices/cartSlice";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToCart,
+  calcTotal,
+  decreaseCart,
+} from "../../store/slices/cartSlice";
 import { calcRating, formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import Button from "../Button/Button";
-import CounterQuantity from "./CounterQuantity";
 
 const Configuration = ({ product }) => {
   const dispatch = useDispatch();
 
+  const cartProducts = useSelector((state) => state.carts);
+  const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    dispatch(calcTotal());
+    const item = cartProducts?.listItems?.find(
+      (item) => item?._id === product?._id,
+    );
+    if (item) {
+      setQuantity(item?.quantity);
+    }
+  }, [cartProducts, dispatch]);
+
   const { GoDotFill, BsFillCartCheckFill } = icons;
   const onAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  const onHandlerDecreaseItem = (id) => {
+    dispatch(decreaseCart(id));
+  };
+
+  const onHandlerIncreaseItem = (product) => {
     dispatch(addToCart(product));
   };
 
@@ -74,7 +98,23 @@ const Configuration = ({ product }) => {
         <div className="flex ga-2">
           <label className="font-semibold text-sm mt-3">Quantity: </label>
           <div className="flex justify-start pl-8">
-            <CounterQuantity />
+            <div className="flex">
+              <button
+                className="flex border p-2 bg-gray-100 hover:bg-main hover:text-white"
+                onClick={() => onHandlerDecreaseItem(product?._id)}
+              >
+                -
+              </button>
+              <span className="border-y p-2 bg-gray-100 flex justify-center items-center w-[50px]">
+                <p>{quantity}</p>
+              </span>
+              <button
+                className="flex border p-2 bg-gray-100 hover:bg-main hover:text-white"
+                onClick={() => onHandlerIncreaseItem(product)}
+              >
+                +
+              </button>
+            </div>
           </div>
         </div>
         <div className="flex flex-col w-full">

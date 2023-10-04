@@ -46,7 +46,13 @@ import ChangeProfile from "./UserProfile/ChangeProfile";
 import SearchGlobal from "./SearchGlobal/SearchGlobal";
 import LoaderSm from "./Loader/LoaderSm";
 import LoaderLg from "./Loader/LoaderLg";
+import CheckOut from "./CheckOut/CheckOut";
+import PaymentDetails from "./CheckOut/PaymentDetails";
+import SendOrder from "./CheckOut/SendOrder";
 export {
+  SendOrder,
+  PaymentDetails,
+  CheckOut,
   LoaderLg,
   LoaderSm,
   SearchGlobal,

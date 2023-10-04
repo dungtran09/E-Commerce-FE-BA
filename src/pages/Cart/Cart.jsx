@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../components";
+import { useStateContext } from "../../contexts/ContextProvider";
 import {
   addToCart,
   calcTotal,
   clearCart,
   decreaseCart,
-  increaseCart,
   removeItem,
 } from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
@@ -17,7 +17,7 @@ import path from "../../utils/path";
 const Cart = () => {
   const { BsArrowLeft, BiMinus, BsPlusLg } = icons;
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.carts);
 
   useEffect(() => {
@@ -38,6 +38,18 @@ const Cart = () => {
 
   const onHandlerClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const onClickHandler = () => {
+    if (cartProducts?.totalQuantity) {
+      navigate(`/${path.PAYMENT}`, { replace: true });
+    }
+  };
+
+  const { shipping, setShipping } = useStateContext();
+
+  const onHandlerSelectOptions = (e) => {
+    setShipping(Number(e.target.value));
   };
 
   const cartProductEls = cartProducts?.listItems?.map((product) => (
@@ -143,8 +155,13 @@ const Cart = () => {
             <label className="font-medium inline-block mb-3 text-sm uppercase">
               Shipping
             </label>
-            <select className="block p-2 text-gray-600 w-full text-sm">
-              <option>Standard shipping - $10.00</option>
+            <select
+              className="block p-2 text-gray-600 w-full text-sm"
+              onClick={(e) => onHandlerSelectOptions(e)}
+            >
+              <option value={10000}>Standard shipping - 10.000</option>
+              <option value={12000}> GHTK - 12.000</option>
+              <option value={13000}> GHN - 13.000</option>
             </select>
           </div>
           <div className="py-10">
@@ -172,7 +189,7 @@ const Cart = () => {
                 {formatNumber(cartProducts?.totalAmount)} VND
               </span>
             </div>
-            <Button name="Check Out" />
+            <Button name="Check Out" onClickHandler={onClickHandler} />
           </div>
         </div>
       </div>

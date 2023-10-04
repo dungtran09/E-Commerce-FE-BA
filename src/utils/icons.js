@@ -29,7 +29,13 @@ import { AiFillEye, AiOutlineMenu, AiFillGift } from "react-icons/ai";
 import { GiVibratingSmartphone } from "react-icons/gi";
 import { BiMinus } from "react-icons/bi";
 import { PiTelevisionSimpleBold } from "react-icons/pi";
-import { FiCamera, FiPrinter, FiHeadphones, FiSettings } from "react-icons/fi";
+import {
+  FiCamera,
+  FiPrinter,
+  FiHeadphones,
+  FiSettings,
+  FiAtSign,
+} from "react-icons/fi";
 import {
   AiFillStar,
   AiOutlineStar,
@@ -38,6 +44,8 @@ import {
   AiOutlineGoogle,
   AiFillGithub,
   AiOutlineSearch,
+  AiOutlineIdcard,
+  AiFillCreditCard,
 } from "react-icons/ai";
 import { IoMdMenu } from "react-icons/io";
 import { ImMenu } from "react-icons/im";
@@ -51,6 +59,9 @@ import { GrAttachment, GrClose } from "react-icons/gr";
 import { BiSolidImageAdd } from "react-icons/bi";
 import { BiSolidBellRing } from "react-icons/bi";
 const icons = {
+  AiOutlineIdcard,
+  AiFillCreditCard,
+  FiAtSign,
   FiSettings,
   BiMinus,
   BsPlusLg,

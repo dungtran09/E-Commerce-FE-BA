@@ -28,7 +28,6 @@ import {
   Employees,
   Customers,
   Settings,
-  Tables,
   Area,
   Bar,
   Financial,
@@ -40,6 +39,7 @@ import {
   Stacked,
 } from "./pages/Admin";
 import BlogsControl from "./pages/Admin/BlogsControl/BlogsControl";
+import Payment from "./pages/Payment/Payment";
 
 function App() {
   const [cookies] = useCookies(["_jwt_user"]);
@@ -56,6 +56,7 @@ function App() {
           <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
           <Route path={path.BLOGS} element={<Blogs />} />
           <Route path={path.CART} element={<Cart />} />
+          <Route path={path.PAYMENT} element={<Payment />} />
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
           <Route path={path.USER} element={<User />} />
@@ -79,7 +80,6 @@ function App() {
             <Route path={path.CUSTOMERS} element={<Customers />} />
             <Route path={path.CALENDAR} element={<Calendar />} />
             <Route path={path.SETTINGS} element={<Settings />} />
-            <Route path={path.TABLES} element={<Tables />} />
             <Route path={path.BLOGS_ADMIN} element={<BlogsControl />} />
             <Route path={path.FINANCIAL} element={<Financial />} />
             <Route path={path.LINE} element={<Line />} />

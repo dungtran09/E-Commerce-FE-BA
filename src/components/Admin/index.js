@@ -5,9 +5,7 @@ import CardLineChart from "./Cards/CardLineChart";
 import CardPageVisits from "./Cards/CardPageVisits";
 import CardProfile from "./Cards/CardProfile";
 import CardSettings from "./Cards/CardSettings";
-import CardSocialTraffic from "./Cards/CardSocialTraffic";
 import CardStats from "./Cards/CardStats";
-import CardTable from "./Cards/CardTable";
 import LineChart from "./Charts/LineChart";
 import Doughnut from "./Charts/Pie";
 import SparkLine from "./Charts/SparkLine";
@@ -26,8 +24,6 @@ import Sidebar from "./SideBar/Sidebar";
 import ThemeSetting from "./ThemeSetting/ThemeSetting";
 import UserProfile from "./UserProfile/UserProfile";
 export {
-  CardTable,
-  CardSocialTraffic,
   CardBarChart,
   CardLineChart,
   CardPageVisits,
