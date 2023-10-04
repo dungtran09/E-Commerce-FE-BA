@@ -5,7 +5,9 @@ import * as apis from "../../apis";
 const initialState = {
   isLoggedIn: false,
   status: statusCode.EDLE,
-  userInfo: null,
+  userInfo: localStorage.getItem("userInfos")
+    ? JSON.parse(localStorage.getItem("userInfos"))
+    : null,
 };
 
 export const userSlice = createSlice({

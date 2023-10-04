@@ -20,8 +20,8 @@ const CheckOut = () => {
     setPaymentByCreditCardMode(true);
   };
 
-  const itemEls = cartProducts?.listItems?.map((item) => (
-    <div className="flex flex-col rounded-lg bg-white sm:flex-row">
+  const itemEls = cartProducts?.listItems?.map((item, index) => (
+    <div className="flex flex-col rounded-lg bg-white sm:flex-row" key={index}>
       <img
         className="m-2 h-24 w-28 rounded-md border object-cover object-center"
         src={item?.thumb}
@@ -29,7 +29,7 @@ const CheckOut = () => {
       />
       <div className="flex w-full flex-col px-4 py-4">
         <span className="font-semibold">{item?.title}</span>
-        <span class="float-right text-sm text-gray-400">
+        <span className="float-right text-sm text-gray-400">
           Quantity: {item?.quantity}
         </span>
         <p className="mt-auto text-main text-sm font-light">
@@ -61,6 +61,7 @@ const CheckOut = () => {
                   type="radio"
                   name="radio"
                   checked
+                  onChange={() => {}}
                 />
                 <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                 <label
@@ -87,6 +88,7 @@ const CheckOut = () => {
                   type="radio"
                   name="radio"
                   checked
+                  onChange={() => {}}
                 />
                 <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                 <label
@@ -113,6 +115,7 @@ const CheckOut = () => {
                   type="radio"
                   name="radio"
                   checked
+                  onChange={() => {}}
                 />
                 <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
                 <label

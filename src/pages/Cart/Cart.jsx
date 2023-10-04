@@ -81,8 +81,9 @@ const Cart = () => {
         </div>
         <input
           className="mx-2 border text-center w-16"
-          value={product?.quantity}
+          value={product?.quantity || 1}
           type="text"
+          onChange={() => {}}
         />
         <div
           onClick={() => onHandlerIncreaseItem(product)}
@@ -140,58 +141,58 @@ const Cart = () => {
             <span>Continue Shopping</span>
           </Link>
         </div>
-
-        <div id="summary" className="w-1/4 px-8 py-10">
-          <h1 className="font-semibold text-xl border-b pb-8">Order Summary</h1>
-          <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">
-              Items ({cartProducts?.listItems?.length | 0})
-            </span>
-            <span className="font-semibold text-sm">
-              {formatNumber(cartProducts?.totalAmount)} VND
-            </span>
-          </div>
-          <div>
-            <label className="font-medium inline-block mb-3 text-sm uppercase">
-              Shipping
-            </label>
-            <select
-              className="block p-2 text-gray-600 w-full text-sm"
-              onClick={(e) => onHandlerSelectOptions(e)}
-            >
-              <option value={10000}>Standard shipping - 10.000</option>
-              <option value={12000}> GHTK - 12.000</option>
-              <option value={13000}> GHN - 13.000</option>
-            </select>
-          </div>
-          <div className="py-10">
-            <label
-              htmlFor="promo"
-              className="font-semibold inline-block mb-3 text-sm uppercase"
-            >
-              Promo Code
-            </label>
-            <input
-              type="text"
-              id="promo"
-              placeholder="Enter your code"
-              className="p-2 text-sm w-full"
-            />
-          </div>
-          <Button
-            name="Apply"
-            style="bg-gray-500 hover:opacity-70 px-5 py-2 text-sm text-white uppercase"
-          />
-          <div className="border-t mt-8">
-            <div className="flex justify-between py-6 text-sm uppercase">
-              <span>Total cost</span>
-              <span className="text-main font-semibold">
-                {formatNumber(cartProducts?.totalAmount + shipping)} VND
+        {cartProducts?.listItems?.length !== 0 && (
+          <div id="summary" className="w-1/4 px-8 py-10">
+            <h1 className="font-semibold text-xl border-b pb-8">
+              Order Summary
+            </h1>
+            <div className="flex justify-between mt-10 mb-5">
+              <span className="font-semibold text-sm uppercase">
+                Items ({cartProducts?.listItems?.length | 0})
               </span>
             </div>
-            <Button name="Check Out" onClickHandler={onClickHandler} />
+            <div>
+              <label className="font-medium inline-block mb-3 text-sm uppercase">
+                Shipping
+              </label>
+              <select
+                className="block p-2 text-gray-600 w-full text-sm"
+                onClick={(e) => onHandlerSelectOptions(e)}
+              >
+                <option value={10000}>Standard shipping - 10.000</option>
+                <option value={12000}> GHTK - 12.000</option>
+                <option value={13000}> GHN - 13.000</option>
+              </select>
+            </div>
+            <div className="py-10">
+              <label
+                htmlFor="promo"
+                className="font-semibold inline-block mb-3 text-sm uppercase"
+              >
+                Promo Code
+              </label>
+              <input
+                type="text"
+                id="promo"
+                placeholder="Enter your code"
+                className="p-2 text-sm w-full"
+              />
+            </div>
+            <Button
+              name="Apply"
+              style="bg-gray-500 hover:opacity-70 px-5 py-2 text-sm text-white uppercase"
+            />
+            <div className="border-t mt-8">
+              <div className="flex justify-between py-6 text-sm uppercase">
+                <span>Total cost</span>
+                <span className="text-main font-semibold">
+                  {formatNumber(cartProducts?.totalAmount + shipping)} VND
+                </span>
+              </div>
+              <Button name="Check Out" onClickHandler={onClickHandler} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );
