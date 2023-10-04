@@ -186,7 +186,7 @@ const Cart = () => {
             <div className="flex justify-between py-6 text-sm uppercase">
               <span>Total cost</span>
               <span className="text-main font-semibold">
-                {formatNumber(cartProducts?.totalAmount)} VND
+                {formatNumber(cartProducts?.totalAmount + shipping)} VND
               </span>
             </div>
             <Button name="Check Out" onClickHandler={onClickHandler} />

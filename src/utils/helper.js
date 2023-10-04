@@ -13,7 +13,7 @@ export const createSlug = (str) => {
 
 export const formatNumber = (number) => {
   if (!number) return;
-  return Number(number.toFixed(1));
+  return Number(number.toFixed(1)).toLocaleString("vi-VN");
 };
 
 export const calcRating = (number) => {
@@ -44,6 +44,12 @@ export const isEmailValid = (email) => {
   const re =
     /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
+};
+
+export const fieldIsEmpty = (value) => {
+  value = value?.trim();
+
+  return value === "" || value === "undefined";
 };
 
 export const isPasswordSecure = (password) => {

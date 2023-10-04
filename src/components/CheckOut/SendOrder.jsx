@@ -126,7 +126,7 @@ const SendOrder = ({ user }) => {
           <div className="mt-6 flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Total</p>
             <p className="text-2xl font-semibold text-gray-900">
-              {formatNumber(cartProducts?.totalAmount) + formatNumber(shipping)}
+              {formatNumber(cartProducts?.totalAmount + shipping)}
               VND
             </p>
           </div>

@@ -113,8 +113,9 @@ const Login = () => {
             <h3 className="text-[28px] text-gray-800 font-semibold mb-8">
               Login
             </h3>
-            {loginEls}
-            {<div className="flex justify-center items-center"></div>}
+            <div className="flex flex-col justify-center items-center">
+              {loginEls}
+            </div>
             <button
               className={`${
                 !fielsIsValid

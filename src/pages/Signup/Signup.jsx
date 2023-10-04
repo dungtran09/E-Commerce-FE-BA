@@ -192,7 +192,9 @@ const Signup = () => {
             <h3 className="text-[28px] text-gray-800 font-semibold mb-8">
               Sign up
             </h3>
-            {signupEls}
+            <div className="flex flex-col justify-center items-center">
+              {signupEls}
+            </div>
             <button
               className={`${
                 !fielsIsValid
