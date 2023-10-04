@@ -40,11 +40,12 @@ import {
 } from "./pages/Admin";
 import BlogsControl from "./pages/Admin/BlogsControl/BlogsControl";
 import Payment from "./pages/Payment/Payment";
+import { useSelector } from "react-redux";
 
 function App() {
   const [cookies] = useCookies(["_jwt_user"]);
 
-  const userObj = JSON.parse(localStorage.getItem("userInfos"));
+  const user = useSelector((state) => state.user);
 
   return (
     <div className="min-h-screen font-main">
@@ -55,20 +56,23 @@ function App() {
           <Route path={path.CATEGORY} element={<Category />} />
           <Route path={path.DETAILS_PRODUCT} element={<ProductDetails />} />
           <Route path={path.BLOGS} element={<Blogs />} />
-          <Route path={path.CART} element={<Cart />} />
-          <Route path={path.PAYMENT} element={<Payment />} />
           <Route path={path.SERVICES} element={<OutService />} />
           <Route path={path.FAQS} element={<FAQs />} />
-          <Route path={path.USER} element={<User />} />
+          <Route path={path.CART} element={<Cart />} />
           <Route path={path.ALL} element={<Error />} />
+        </Route>
+
+        <Route element={<ProtectedRoute isAllowed={user?.isLoggedIn} />}>
+          <Route path={path.PUBLIC} element={<Public />}>
+            <Route path={path.USER} element={<User />} />
+            <Route path={path.PAYMENT} element={<Payment />} />
+          </Route>
         </Route>
         <Route
           element={
             <ProtectedRoute
               isAllowed={
-                userObj &&
-                userObj?.role === "Admin" &&
-                cookies._jwt_user !== "undefined"
+                user && user?.isLogged && cookies._jwt_user !== "undefined"
               }
             />
           }

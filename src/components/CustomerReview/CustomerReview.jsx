@@ -8,12 +8,10 @@ import { PortalToggle } from "../";
 import { apiGetProduct, apiRatings } from "../../apis";
 import { useCookies } from "react-cookie";
 import statusCode from "../../utils/statusCode";
+import { useSelector } from "react-redux";
 
 const CustomerReview = ({ product }) => {
   const { BiSolidImageAdd, GrAttachment, GiPositionMarker } = icons;
-
-  const [user, setUser] = useState(null);
-  const [isLogged, setIsLogged] = useState(false);
 
   const [reviews, setReviews] = useState([]);
   const [totalRatings, setTotalRatings] = useState(0);
@@ -23,14 +21,7 @@ const CustomerReview = ({ product }) => {
   const [updatedProduct, setUpdatedProduct] = useState(product);
   const [msgError, setMsgError] = useState("");
   const [cookies, removeCookie] = useCookies(["_jwt_user"]);
-  const userObj = JSON.parse(localStorage.getItem("userInfos"));
-
-  useEffect(() => {
-    if (userObj) {
-      setUser(userObj);
-      setIsLogged(true);
-    }
-  }, [rating, reviews, totalRatings]);
+  const user = useSelector((state) => state.user);
 
   const fetchRatings = async () => {
     const res = await apiRatings(review, product?._id);
@@ -51,7 +42,7 @@ const CustomerReview = ({ product }) => {
   };
 
   useEffect(() => {
-    if (cookies._jwt_user && userObj) {
+    if (cookies._jwt_user && user?.isLogged) {
       fetchRatings();
     }
   }, []);
@@ -81,6 +72,11 @@ const CustomerReview = ({ product }) => {
   };
 
   const handlerOnSubmit = async () => {
+    if (user?.isLogged === false) {
+      setIsError(true);
+      setMsgError("Please login to rating!");
+    }
+
     if (!review?.text || !review?.star) {
       setIsError(true);
       setMsgError("Please ratings and write comment!");

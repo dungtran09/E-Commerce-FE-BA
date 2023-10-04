@@ -39,7 +39,7 @@ const UserRatings = ({ reviews }) => {
             <span className="font-normal"> {review?.updateAt}</span>
           </div>
         </div>
-        <div className="p-4 bg-main hover:opacity-70 rounded-full h-4 w-4 flex items-center justify-center text-lg text-white shadow-lg cursor-pointer">
+        <div className="p-4 bg-main hover:opacity-70 rounded-full h-4 w-4 flex items-center justify-center text-xl text-white mt-4 shadow-lg cursor-pointer">
           +
         </div>
       </div>
