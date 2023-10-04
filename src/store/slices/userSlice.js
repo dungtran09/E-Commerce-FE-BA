@@ -3,8 +3,10 @@ import statusCode from "../../utils/statusCode";
 import * as apis from "../../apis";
 
 const initialState = {
-  isLoggedIn: false,
-  status: statusCode.EDLE,
+  isLoggedIn: localStorage.getItem("userInfos") ? true : false,
+  status: localStorage.getItem("userInfos")
+    ? statusCode.SUCCESS
+    : statusCode.EDLE,
   userInfo: localStorage.getItem("userInfos")
     ? JSON.parse(localStorage.getItem("userInfos"))
     : null,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "../../components";
+import { Button, PortalToggle } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
 import {
   addToCart,
@@ -13,12 +13,15 @@ import {
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import path from "../../utils/path";
+import statusCode from "../../utils/statusCode";
 
 const Cart = () => {
   const { BsArrowLeft, BiMinus, BsPlusLg } = icons;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cartProducts = useSelector((state) => state.carts);
+  const user = useSelector((state) => state.user);
+  const [isUserLogIn, setIsUserLogin] = useState(false);
 
   useEffect(() => {
     dispatch(calcTotal());
@@ -40,18 +43,27 @@ const Cart = () => {
     dispatch(clearCart());
   };
 
-  const onClickHandler = () => {
-    if (cartProducts?.totalQuantity) {
-      navigate(`/${path.PAYMENT}`, { replace: true });
-    }
-  };
-
   const { shipping, setShipping } = useStateContext();
 
   const onHandlerSelectOptions = (e) => {
     setShipping(Number(e.target.value));
   };
 
+  const showStatus = () => {
+    setIsUserLogin(true);
+  };
+
+  const hideStatus = () => {
+    setIsUserLogin(false);
+  };
+
+  const onNavigateToPayment = () => {
+    if (user?.isLoggedIn) {
+      navigate(`/${path.PAYMENT}`, { replace: true });
+    } else {
+      setIsUserLogin(true);
+    }
+  };
   const cartProductEls = cartProducts?.listItems?.map((product) => (
     <div
       className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5 "
@@ -189,7 +201,15 @@ const Cart = () => {
                   {formatNumber(cartProducts?.totalAmount + shipping)} VND
                 </span>
               </div>
-              <Button name="Check Out" onClickHandler={onClickHandler} />
+              <Button name="Check Out" onClickHandler={onNavigateToPayment} />
+              {isUserLogIn && (
+                <PortalToggle
+                  status={statusCode.ERROR}
+                  message="Please login to payment process."
+                  showStatus={showStatus}
+                  hideStatus={hideStatus}
+                />
+              )}
             </div>
           </div>
         )}

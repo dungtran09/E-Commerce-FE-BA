@@ -1,15 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../../contexts/ContextProvider";
 import { calcTotal, removeItem } from "../../store/slices/cartSlice";
 import { formatNumber } from "../../utils/helper";
 import icons from "../../utils/icons";
 import path from "../../utils/path";
+import statusCode from "../../utils/statusCode";
+import PortalToggle from "../PortalToggle/PortalToggle";
 
 const SideBarCart = ({ showSidebar, setShowSidebar }) => {
   const { GrClose } = icons;
 
   const cartProducts = useSelector((state) => state.carts);
+  const { shipping } = useStateContext();
+
+  const user = useSelector((state) => state.user);
+  const [isUserLogIn, setIsUserLogin] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,6 +26,22 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
 
   const onRemoveFromCart = (id) => {
     dispatch(removeItem(id));
+  };
+
+  const showStatus = () => {
+    setIsUserLogin(true);
+  };
+
+  const hideStatus = () => {
+    setIsUserLogin(false);
+  };
+
+  const onNavigateToPayment = () => {
+    if (user?.isLoggedIn) {
+      navigate(`/${path.PAYMENT}`, { replace: true });
+    } else {
+      setIsUserLogin(true);
+    }
   };
 
   const cartProductEls = cartProducts?.listItems?.map((product, index) => (
@@ -93,32 +117,44 @@ const SideBarCart = ({ showSidebar, setShowSidebar }) => {
             </div>
           </div>
 
-          <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-            <div className="flex justify-between text-base font-medium text-gray-900">
-              <p className="text-[14px] uppercase">Subtotal</p>
-              <p className="text-main font-semibold text-sm">
-                {formatNumber(cartProducts?.totalAmount) || 0} VND
+          {user?.isLoggedIn && (
+            <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+              <div className="flex justify-between text-base font-medium text-gray-900">
+                <p className="text-[14px] uppercase">Total</p>
+                <p className="text-main font-semibold text-sm">
+                  {formatNumber(cartProducts?.totalAmount + shipping) || 0} VND
+                </p>
+              </div>
+              <p className="mt-0.5 text-sm text-gray-500">
+                Total has included Shipping.
               </p>
+              <div className="mt-6">
+                <button
+                  onClick={() => onNavigateToPayment()}
+                  className="flex items-center justify-center rounded-md border border-transparent w-full bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:opacity-90"
+                >
+                  Checkout
+                </button>
+              </div>
+              <div className="mt-6 flex justify-center text-center gap-1 text-sm text-gray-500">
+                <p>or</p>
+                <Link to={`/${path.HOME}`}>
+                  <button className="font-medium text-main hover:opacity-70">
+                    Continue Shopping
+                    <span aria-hidden="true"> &rarr;</span>
+                  </button>
+                </Link>
+                {isUserLogIn && (
+                  <PortalToggle
+                    status={statusCode.ERROR}
+                    message="Please login to payment process."
+                    showStatus={showStatus}
+                    hideStatus={hideStatus}
+                  />
+                )}
+              </div>
             </div>
-            <p className="mt-0.5 text-sm text-gray-500">
-              Shipping and taxes calculated at checkout.
-            </p>
-            <div className="mt-6">
-              <a
-                href="#"
-                className="flex items-center justify-center rounded-md border border-transparent bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:opacity-90"
-              >
-                Checkout
-              </a>
-            </div>
-            <div className="mt-6 flex justify-center text-center gap-1 text-sm text-gray-500">
-              <p>or</p>
-              <button className="font-medium text-main hover:opacity-70">
-                Continue Shopping
-                <span aria-hidden="true"> &rarr;</span>
-              </button>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </>

@@ -33,7 +33,7 @@ const CheckOut = () => {
           Quantity: {item?.quantity}
         </span>
         <p className="mt-auto text-main text-sm font-light">
-          {formatNumber(item?.price)} VND
+          {formatNumber(item?.price * item?.quantity)} VND
         </p>
       </div>
     </div>
